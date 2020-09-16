@@ -62,6 +62,7 @@ Macro definitions
 /* Mailboxes used for demo. Keep mailboxes 4 apart if you want masks 
 independent - not affecting neighboring mailboxes. */
 #define 	CANBOX_TX		    (0x00)      /* First mailbox */
+#define 	CANBOX(MB_NUM)		(MB_NUM)      /* mailbox number*/
 #define 	CANBOX_RX 		    (0x04)
 #define 	CANBOX_REMOTE_RX	(0x08)
 #define 	CANBOX_REMOTE_TX	(0x0C)	    /* Mailbox #12 */

@@ -207,10 +207,6 @@ void main(void)
     *****************************************/
     /* Normal CAN bus usage. */
     api_status = R_CAN_PortSet(g_can_channel, ENABLE);
-    /* Test modes. With Internal loopback mode you only need one board! */
-    //api_status = R_CAN_PortSet(g_can_channel, CANPORT_TEST_1_INT_LOOPBACK);
-    //api_status = R_CAN_PortSet(g_can_channel, CANPORT_TEST_0_EXT_LOOPBACK);
-    //api_status = R_CAN_PortSet(g_can_channel, CANPORT_TEST_LISTEN_ONLY);
 
     /* Initialize CAN mailboxes, and setup the demo receive and transmit dataframe variables. */
     api_status |= init_can_app();
@@ -222,7 +218,23 @@ void main(void)
         app_err_nr = APP_ERR_CAN_INIT;
     }
 	
-	tx_data.id         = 0x03AA;
+	tx_data.id         = 0x0001;
+	tx_data.dlc        = 8;
+    tx_data.data[0]     = 0xF1;
+    tx_data.data[1]     = 0xF3;
+    tx_data.data[2]     = 0xF5;
+    tx_data.data[3]     = 0xF7;
+    tx_data.data[4]     = 0xF9;
+    tx_data.data[5]     = 0xFB;
+    tx_data.data[6]     = 0xFD;
+    tx_data.data[7]     = 0xFF;
+	
+	printf("Before TxSet MB=1\n");
+	api_status |= R_CAN_TxSet(g_can_channel, CANBOX(2), &tx_data, DATA_FRAME);
+	printf("After TxSet MB=1");
+	printf("\n");
+	
+	tx_data.id         = 0x0002;
 	tx_data.dlc        = 8;
     tx_data.data[0]     = 0xC1;
     tx_data.data[1]     = 0xC3;
@@ -232,92 +244,11 @@ void main(void)
     tx_data.data[5]     = 0xCB;
     tx_data.data[6]     = 0xCD;
     tx_data.data[7]     = 0xCF;
-	
-    /***************************************************
-     * Try to send very first frame. Stop if no success.
-     ***************************************************/
-	printf("After assign data to struct\n");
-    if (FRAME_ID_MODE == STD_ID_MODE )
-    {
-		printf("FRAME_ID_MODE == STD_ID_MODE\n");
-        // api_status |= R_CAN_TxSet(g_can_channel, CANBOX_TX, &tx_dataframe, DATA_FRAME);
-        api_status |= R_CAN_TxSet(g_can_channel, CANBOX_TX, &tx_data, DATA_FRAME);
-    }
-    else
-    {
-		printf("FRAME_ID_MODE != STD_ID_MODE\n");
-        // api_status |= R_CAN_TxSetXid(g_can_channel, CANBOX_TX, &tx_dataframe, DATA_FRAME);
-        api_status |= R_CAN_TxSetXid(g_can_channel, CANBOX_TX, &tx_data, DATA_FRAME);
-    }
+	printf("Before TxSet MB=2\n");
+	api_status |= R_CAN_TxSet(g_can_channel, CANBOX(1), &tx_data, DATA_FRAME);
+	printf("After TxSet MB=2");
+	printf("\n");
 
-	printf("After assign data to struct\n");
-    /* Don't continue if problem already. */
-    if (api_status != R_CAN_OK)
-    {
-        while(1)
-            ;
-    }
-
-    /* Wait for first frame to be sent. */
-    #if USE_CAN_POLL
-    while (R_CAN_TxCheck(g_can_channel, CANBOX_TX))
-    #else
-    while (CAN0_tx_sentdata_flag == 0)
-    #endif
-    {
-        /* If Bus Off, wait until cleared. If it never does, bus is broke. */
-        bus_status = R_CAN_CheckErr(g_can_channel);
-        while (bus_status == R_CAN_STATUS_BUSOFF)
-        {
-            bus_status = R_CAN_CheckErr(g_can_channel);
-        }
-    }
-    /************************
-     * OK!! Sent one frame! *
-     ************************/
-    #if BSP_CFG_IO_LIB_ENABLE
-        printf("Success! Sent first CAN frame.\n");
-    #endif
-
-    /******************************************************************
-     * Send multiple CAN test frames back to back as fast as possible.
-     *****************************************************************/
-    // #if USE_CAN_POLL /* ============================================================= */
-    // for (i = 0; i < NR_STARTUP_TEST_FRAMES; i++)
-    // {
-        // api_status |= R_CAN_Tx(g_can_channel, CANBOX_TX);
-        // while (R_CAN_TxCheck(g_can_channel, CANBOX_TX))
-        // {
-            // R_BSP_NOP();
-        // }
-    // }
-    // #if BSP_CFG_IO_LIB_ENABLE
-        // printf("Sent %d CAN0 frames.\n", NR_STARTUP_TEST_FRAMES);
-    // #endif
-
-    // #else /* Use CAN interrupts
-    // I-flag is set by default.
-
-    // CAN tx interrupt should have triggered by first frame. */
-    // while (CAN0_tx_sentdata_flag == 0)
-    // {
-        // R_BSP_NOP();
-    // }
-    // CAN0_tx_sentdata_flag = 0;
-
-    // for (i = 0; i < NR_STARTUP_TEST_FRAMES; i++)
-    // {
-        // api_status |= R_CAN_Tx(g_can_channel, CANBOX_TX);
-        // while (CAN0_tx_sentdata_flag == 0)
-        // {
-            // R_BSP_NOP();
-        // }
-        // CAN0_tx_sentdata_flag = 0;
-    // }
-    // #if BSP_CFG_IO_LIB_ENABLE
-        // printf("Sent %d CAN0 frames.\n", NR_STARTUP_TEST_FRAMES);
-    // #endif
-    // #endif  /* === End send startup test frames === */
 
     /*  M A I N  L O O P  * * * * * * * * * * * * * * * * * * * * * * * */
     while(1)
