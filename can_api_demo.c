@@ -224,14 +224,14 @@ void main(void)
 	
 	tx_data.id         = 0x03AA;
 	tx_data.dlc        = 8;
-    tx_data.data[0]     = 0xA0;
-    tx_data.data[1]     = 0xA3;
-    tx_data.data[2]     = 0xA5;
-    tx_data.data[3]     = 0xA7;
-    tx_data.data[4]     = 0xA9;
-    tx_data.data[5]     = 0xAB;
-    tx_data.data[6]     = 0xAD;
-    tx_data.data[7]     = 0xAF;
+    tx_data.data[0]     = 0xC1;
+    tx_data.data[1]     = 0xC3;
+    tx_data.data[2]     = 0xC5;
+    tx_data.data[3]     = 0xC7;
+    tx_data.data[4]     = 0xC9;
+    tx_data.data[5]     = 0xCB;
+    tx_data.data[6]     = 0xCD;
+    tx_data.data[7]     = 0xCF;
 	
     /***************************************************
      * Try to send very first frame. Stop if no success.
@@ -282,42 +282,42 @@ void main(void)
     /******************************************************************
      * Send multiple CAN test frames back to back as fast as possible.
      *****************************************************************/
-    #if USE_CAN_POLL /* ============================================================= */
-    for (i = 0; i < NR_STARTUP_TEST_FRAMES; i++)
-    {
-        api_status |= R_CAN_Tx(g_can_channel, CANBOX_TX);
-        while (R_CAN_TxCheck(g_can_channel, CANBOX_TX))
-        {
-            R_BSP_NOP();
-        }
-    }
-    #if BSP_CFG_IO_LIB_ENABLE
-        printf("Sent %d CAN0 frames.\n", NR_STARTUP_TEST_FRAMES);
-    #endif
+    // #if USE_CAN_POLL /* ============================================================= */
+    // for (i = 0; i < NR_STARTUP_TEST_FRAMES; i++)
+    // {
+        // api_status |= R_CAN_Tx(g_can_channel, CANBOX_TX);
+        // while (R_CAN_TxCheck(g_can_channel, CANBOX_TX))
+        // {
+            // R_BSP_NOP();
+        // }
+    // }
+    // #if BSP_CFG_IO_LIB_ENABLE
+        // printf("Sent %d CAN0 frames.\n", NR_STARTUP_TEST_FRAMES);
+    // #endif
 
-    #else /* Use CAN interrupts
-    I-flag is set by default.
+    // #else /* Use CAN interrupts
+    // I-flag is set by default.
 
-    CAN tx interrupt should have triggered by first frame. */
-    while (CAN0_tx_sentdata_flag == 0)
-    {
-        R_BSP_NOP();
-    }
-    CAN0_tx_sentdata_flag = 0;
+    // CAN tx interrupt should have triggered by first frame. */
+    // while (CAN0_tx_sentdata_flag == 0)
+    // {
+        // R_BSP_NOP();
+    // }
+    // CAN0_tx_sentdata_flag = 0;
 
-    for (i = 0; i < NR_STARTUP_TEST_FRAMES; i++)
-    {
-        api_status |= R_CAN_Tx(g_can_channel, CANBOX_TX);
-        while (CAN0_tx_sentdata_flag == 0)
-        {
-            R_BSP_NOP();
-        }
-        CAN0_tx_sentdata_flag = 0;
-    }
-    #if BSP_CFG_IO_LIB_ENABLE
-        printf("Sent %d CAN0 frames.\n", NR_STARTUP_TEST_FRAMES);
-    #endif
-    #endif  /* === End send startup test frames === */
+    // for (i = 0; i < NR_STARTUP_TEST_FRAMES; i++)
+    // {
+        // api_status |= R_CAN_Tx(g_can_channel, CANBOX_TX);
+        // while (CAN0_tx_sentdata_flag == 0)
+        // {
+            // R_BSP_NOP();
+        // }
+        // CAN0_tx_sentdata_flag = 0;
+    // }
+    // #if BSP_CFG_IO_LIB_ENABLE
+        // printf("Sent %d CAN0 frames.\n", NR_STARTUP_TEST_FRAMES);
+    // #endif
+    // #endif  /* === End send startup test frames === */
 
     /*  M A I N  L O O P  * * * * * * * * * * * * * * * * * * * * * * * */
     while(1)
