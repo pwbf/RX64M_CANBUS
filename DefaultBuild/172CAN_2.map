@@ -1,4 +1,4 @@
-Renesas Optimizing Linker (W3.02.00 )             16-Sep-2020 14:41:50
+Renesas Optimizing Linker (W3.02.00 )             16-Sep-2020 15:53:33
 
 *** Options ***
 
@@ -96,7 +96,7 @@ W_2
 L
                                   ffc00bec  ffc00ef8       30d   4
 P
-                                  ffc00ef9  ffc05629      4731   1
+                                  ffc00ef9  ffc05628      4730   1
 EXCEPTVECT
                                   ffffff80  fffffffb        7c   4
 RESETVECT

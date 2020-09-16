@@ -222,16 +222,16 @@ void main(void)
         app_err_nr = APP_ERR_CAN_INIT;
     }
 	
-	tx_data.id         = 0xAFCC;
+	tx_data.id         = 0x03AA;
 	tx_data.dlc        = 8;
-    tx_data.data[0]     = 0xF0;
-    tx_data.data[1]     = 0xF1;
-    tx_data.data[2]     = 0xF2;
-    tx_data.data[3]     = 0xF3;
-    tx_data.data[4]     = 0xF4;
-    tx_data.data[5]     = 0xF5;
-    tx_data.data[6]     = 0xF6;
-    tx_data.data[7]     = 0xF7;
+    tx_data.data[0]     = 0xA0;
+    tx_data.data[1]     = 0xA3;
+    tx_data.data[2]     = 0xA5;
+    tx_data.data[3]     = 0xA7;
+    tx_data.data[4]     = 0xA9;
+    tx_data.data[5]     = 0xAB;
+    tx_data.data[6]     = 0xAD;
+    tx_data.data[7]     = 0xAF;
 	
     /***************************************************
      * Try to send very first frame. Stop if no success.
