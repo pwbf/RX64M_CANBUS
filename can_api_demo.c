@@ -220,22 +220,6 @@ void main(void)
 	
 	tx_data.id         = 0x0001;
 	tx_data.dlc        = 8;
-    tx_data.data[0]     = 0xF1;
-    tx_data.data[1]     = 0xF3;
-    tx_data.data[2]     = 0xF5;
-    tx_data.data[3]     = 0xF7;
-    tx_data.data[4]     = 0xF9;
-    tx_data.data[5]     = 0xFB;
-    tx_data.data[6]     = 0xFD;
-    tx_data.data[7]     = 0xFF;
-	
-	printf("Before TxSet MB=1\n");
-	api_status |= R_CAN_TxSet(g_can_channel, CANBOX(2), &tx_data, DATA_FRAME);
-	printf("After TxSet MB=1");
-	printf("\n");
-	
-	tx_data.id         = 0x0002;
-	tx_data.dlc        = 8;
     tx_data.data[0]     = 0xC1;
     tx_data.data[1]     = 0xC3;
     tx_data.data[2]     = 0xC5;
@@ -244,11 +228,11 @@ void main(void)
     tx_data.data[5]     = 0xCB;
     tx_data.data[6]     = 0xCD;
     tx_data.data[7]     = 0xCF;
-	printf("Before TxSet MB=2\n");
-	api_status |= R_CAN_TxSet(g_can_channel, CANBOX(1), &tx_data, DATA_FRAME);
-	printf("After TxSet MB=2");
+	
+	printf("Before TxSet MB=1\n");
+	api_status |= R_CAN_TxSet(g_can_channel, CANBOX(2), &tx_data, DATA_FRAME);
+	printf("After TxSet MB=1");
 	printf("\n");
-
 
     /*  M A I N  L O O P  * * * * * * * * * * * * * * * * * * * * * * * */
     while(1)
@@ -787,7 +771,7 @@ static void my_can_err0_callback(void)
             errcode_store_accumulate |= CAN0.ECSR.BYTE;
 
             /* Clear EIFR and ECSR. Do a byte-write to avoid read-modify-write with HW writing another bit inbetween. (HW manual says
-             * "When a single bit is set to 0 by a program, do not use the logic operation instruction (AND) – use the transfer
+             * "When a single bit is set to 0 by a program, do not use the logic operation instruction (AND) ??use the transfer
              * instruction (MOV) to ensure that only the specified bit is set to 0 and the other bits are set to 1. Writing 1
              * has no effect to these bit values.)" */
             CAN0.EIFR.BYTE = 0;
@@ -832,7 +816,7 @@ void my_can_err1_callback(void)
             errcode_store_accumulate |= CAN1.ECSR.BYTE;
 
             /* Clear EIFR and ECSR. Do a byte-write to avoid read-modify-write with HW writing another bit inbetween. (HW manual says
-             * "When a single bit is set to 0 by a program, do not use the logic operation instruction (AND) – use the transfer
+             * "When a single bit is set to 0 by a program, do not use the logic operation instruction (AND) ??use the transfer
              * instruction (MOV) to ensure that only the specified bit is set to 0 and the other bits are set to 1. Writing 1
              * has no effect to these bit values.)" */
             CAN1.EIFR.BYTE = 0;
@@ -879,7 +863,7 @@ static void my_can_err2_callback(void)
             errcode_store_accumulate |= CAN2.ECSR.BYTE;
 
             /* Clear EIFR and ECSR. Do a byte-write to avoid read-modify-write with HW writing another bit inbetween. (HW manual says
-             * "When a single bit is set to 0 by a program, do not use the logic operation instruction (AND) – use the transfer
+             * "When a single bit is set to 0 by a program, do not use the logic operation instruction (AND) ??use the transfer
              * instruction (MOV) to ensure that only the specified bit is set to 0 and the other bits are set to 1. Writing 1
              * has no effect to these bit values.)" */
             CAN2.EIFR.BYTE = 0;
