@@ -813,7 +813,7 @@
       <GeneralOptionPatch-DefaultValue>None</GeneralOptionPatch-DefaultValue>
       <GeneralOptionSaveAcc-DefaultValue>False</GeneralOptionSaveAcc-DefaultValue>
       <IsLockedByUser>False</IsLockedByUser>
-      <TimeTagModified--0>-8586030136280916418</TimeTagModified--0>
+      <TimeTagModified--0>-8586008640364827753</TimeTagModified--0>
       <BuildMode-0>DefaultBuild</BuildMode-0>
       <Memo-0 />
       <OutputMessageFormat-0>%TargetFiles%</OutputMessageFormat-0>
@@ -1241,7 +1241,7 @@ D_2=R_2
       <LinkOptionCommandLine-DefaultValue />
       <LinkOptionSplitVect-DefaultValue>False</LinkOptionSplitVect-DefaultValue>
       <IsLockedByUser>False</IsLockedByUser>
-      <TimeTagModified--0>-8586026708875069439</TimeTagModified--0>
+      <TimeTagModified--0>-8586008638982789713</TimeTagModified--0>
       <LinkOptionCpu-0>False</LinkOptionCpu-0>
       <LinkOptionForm-0>Absolute</LinkOptionForm-0>
       <LinkOptionFormConvert-0>Stype</LinkOptionFormConvert-0>
@@ -1355,7 +1355,12 @@ D_2=R_2
       <LinkOptionByteCountValue-DefaultValue>FF</LinkOptionByteCountValue-DefaultValue>
       <LinkOptionCrc-DefaultValue>None</LinkOptionCrc-DefaultValue>
       <LinkOptionOtherAdditionalOptionsForConvertFile-DefaultValue />
-      <HexOptionCommandLine-DefaultValue />
+      <HexOptionCommandLine-DefaultValue>-end
+-input=%BuildModeName%\%ProjectName%.abs
+-form=stype
+-output=%BuildModeName%\%ProjectName%.mot
+-exit
+</HexOptionCommandLine-DefaultValue>
       <LinkOptionCrc2-DefaultValue>False</LinkOptionCrc2-DefaultValue>
       <LinkOptionCrcOutputAddress-DefaultValue>0</LinkOptionCrcOutputAddress-DefaultValue>
       <LinkOptionCrcCalculationRange-DefaultValue />
@@ -1366,7 +1371,7 @@ D_2=R_2
       <LinkOptionS9-DefaultValue>False</LinkOptionS9-DefaultValue>
       <HexOptionCreateUnfilledArea-DefaultValue>False</HexOptionCreateUnfilledArea-DefaultValue>
       <IsLockedByUser>False</IsLockedByUser>
-      <TimeTagModified--0>-8586030136280746871</TimeTagModified--0>
+      <TimeTagModified--0>-8586008638982789713</TimeTagModified--0>
       <HexOptionForm-0>Stype</HexOptionForm-0>
       <HexOptionOutput-0>True</HexOptionOutput-0>
       <HexOptionSameLinkMessage-0>True</HexOptionSameLinkMessage-0>
@@ -1392,7 +1397,12 @@ D_2=R_2
       <LinkOptionByteCountValue-0>FF</LinkOptionByteCountValue-0>
       <LinkOptionCrc-0>None</LinkOptionCrc-0>
       <LinkOptionOtherAdditionalOptionsForConvertFile-0 />
-      <HexOptionCommandLine-0 />
+      <HexOptionCommandLine-0>-end
+-input=%BuildModeName%\%ProjectName%.abs
+-form=stype
+-output=%BuildModeName%\%ProjectName%.mot
+-exit
+</HexOptionCommandLine-0>
       <LinkOptionCrc2-0>False</LinkOptionCrc2-0>
       <LinkOptionCrcOutputAddress-0>0</LinkOptionCrcOutputAddress-0>
       <LinkOptionCrcCalculationRange-0 />

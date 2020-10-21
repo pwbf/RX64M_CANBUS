@@ -1,66 +1,4 @@
-/***********************************************************************************************************************
-* DISCLAIMER
-* This software is supplied by Renesas Electronics Corporation and is only intended for use with Renesas products. No
-* other uses are authorized. This software is owned by Renesas Electronics Corporation and is protected under all
-* applicable laws, including copyright laws.
-* THIS SOFTWARE IS PROVIDED "AS IS" AND RENESAS MAKES NO WARRANTIES REGARDING
-* THIS SOFTWARE, WHETHER EXPRESS, IMPLIED OR STATUTORY, INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY,
-* FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. ALL SUCH WARRANTIES ARE EXPRESSLY DISCLAIMED. TO THE MAXIMUM
-* EXTENT PERMITTED NOT PROHIBITED BY LAW, NEITHER RENESAS ELECTRONICS CORPORATION NOR ANY OF ITS AFFILIATED COMPANIES
-* SHALL BE LIABLE FOR ANY DIRECT, INDIRECT, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES FOR ANY REASON RELATED TO THIS
-* SOFTWARE, EVEN IF RENESAS OR ITS AFFILIATES HAVE BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
-* Renesas reserves the right, without notice, to make changes to this software and to discontinue the availability of
-* this software. By using this software, you agree to the additional terms and conditions found by accessing the
-* following link:
-* http://www.renesas.com/disclaimer
-*
-* Copyright (C) 2017 Renesas Electronics Corporation. All rights reserved.
-***********************************************************************************************************************/
-/***********************************************************************************************************************
-* File Name    : can_demo.c
-* Description  : CAN API demo. Main application program. See operation below under DEMO DESCRIPTION.
 
-CAN Baudrate: 500 kbps.
-
-Demonstration of CAN receive and transmit using the CAN API.
-
-The demo can be run in three ways:
-1.  Program two boards and connect them together over the CAN bus. Swap the CAN ID values TX_CANID_DEMO_INIT and
-RX_CANID_DEMO_INIT on one of the boards before programming and running the demo.
-2) Set CANPORT_TEST_1_INT_LOOPBACK in the R_CAN_PortSet API to communicate internally, no external bus needed!
-3) Use a CAN bus monitor, e.g. SysTec's low-cost monitor 3204000, to send and receive frames to/from the demo.
-Remote frames can also be demonstrated if CAN interrupts are enabled. See last paragraph below.
-
-OPERATION:
-The demo transmits and receives frames with the default CAN-IDs TX_CANID_DEMO_INIT and RX_CANID_DEMO_INIT.
-
-The demo starts up by sending NR_STARTUP_TEST_FRAMES test frames back-to-back as fast as possible. This has two
-purposes. 1) Check the bus link. 2) Demonstrate how messages are sent back-to-back as fast as possible.
-
-User action: Press SW1 to send one CAN frame. To increment the TxID hold SW2 down and press SW3. The actual send
-command is invoked by the Sw1Func() function. To change RxID hold SW3 down and press SW2. The demo "action" can best
-be seen inside function can_int_demo or can_poll_demo (depending on the setting of USE_CAN_POLL in r_can_rx_config.h).
-
-Remote frames:
-The demo will also send remote frame responses if REMOTE_DEMO_ENABLE is set to 1 in can_api_demo.c. The requesting
-CAN source must be set to send remote frame requests with CAN-ID 50h (REMOTE_TEST_ID in can_api_demo.h) to to the RX.
-The remote frames demo only runs in interrupt mode (USE_CAN_POLL set to 1.
-* ************************************************************************************************************************
-* History : DD.MM.YYYY Version Description
-*         : 02.20.2015 2.01    For 64M, 71M. Originates from RX63N.
-*         : 30.10.2015 2.02    FIT update, new R_CAN_Create interface.
-*         : 3.3.2016   2.10    65N added.
-*         : 1.30.2017  2.11    - Test run with 65N-2MB.
-*                              - Added ERROR_DIAG macro. Use for bus error diagnostics only.
-*                              - Removed all USE_LCD code. Using debug console (printf) instead.
-*                                Added corresponding trace code to demo.
-*                              - Function names changed_to_this_style().
-*                              - Cleaned up handle_can_bus_state().
-*                              - Some GSCE coding guidelines implemented. Mulitple lines changed. (Plugin was used.)
-***********************************************************************************************************************/
-/***********************************************************************************************************************
-Includes   <System Includes> , "Project Includes"
-***********************************************************************************************************************/
 #include "can_api_demo.h"
 #include "platform.h"
 #include <machine.h>
@@ -69,12 +7,6 @@ Includes   <System Includes> , "Project Includes"
 #include <stdio.h>
 
 
-/***********************************************************************************************************************
-Typedef definitions
-***********************************************************************************************************************/
-/***********************************************************************************************************************
-Macro definitions
-***********************************************************************************************************************/
 /* TEST CAN ID */
 #if (FRAME_ID_MODE == STD_ID_MODE)
     #define     TX_CANID_DEMO_INIT  	(0x0A0)    // Max 0x7FF if Standard ID.
@@ -133,6 +65,7 @@ Global variables and functions imported (externs)
 ***********************************************************************************************************************/
 /* Data */
 /* Functions */
+
 extern void   read_switches(void);
 
 /***********************************************************************************************************************
@@ -151,8 +84,6 @@ static uint32_t nr_frames_rx = 0, nr_frames_tx = 0;
 static uint32_t init_can_app(void);
 static void     check_can_errors(void);
 static void     handle_can_bus_state(uint8_t ch_nr);
-static void     test_leds(uint32_t nr_led_flashes);
-static void     demo_output_ports_configure(void);
 
 #if USE_CAN_POLL
  static void    can_poll_demo(void);
@@ -169,19 +100,98 @@ Parameters:     -
 Returns:        -
 Description:    Main Can API demo program. See top of file.
 ***********************************************************************************************************************/
+
+uint8_t rtn = 0;
 void main(void)
 {
-    uint32_t  i, api_status = R_CAN_OK, bus_status, led_show_count;
+	PORTE.PDR.BIT.B1 = 1;
+	PORTE.PDR.BIT.B2 = 1;
+	PORTE.PDR.BIT.B3 = 1;
+	PORTE.PDR.BIT.B4 = 1;
+	if(CANBUS_Init()){
+		while(1U){
+			printf("CAN BUS Initial failed\n");
+		}
+	}
+
+	printf("Before RxSet\n");
+	/*R_CAN_RxSet(g_can_channel, CANBOX(1), 0x0001, DATA_FRAME);
+	R_BSP_SoftwareDelay(100, BSP_DELAY_MILLISECS);*/
+	rtn = R_CAN_RxSet(g_can_channel, CANBOX(2), 0x0002, DATA_FRAME);
+	
+	switch(rtn){
+	   	case R_CAN_OK:
+			printf("R_CAN_RxSet>> R_CAN_OK\n");
+			break;
+	   	case R_CAN_SW_BAD_MBX:
+			printf("R_CAN_RxSet>> R_CAN_SW_BAD_MBX\n");
+			break;
+	   	case R_CAN_BAD_CH_NR:
+			printf("R_CAN_RxSet>> R_CAN_BAD_CH_NR\n");
+			break;
+	   	case R_CAN_SW_SET_TX_TMO:
+			printf("R_CAN_RxSet>> R_CAN_SW_SET_TX_TMO\n");
+			break;
+	   	case R_CAN_SW_SET_RX_TMO:
+			printf("R_CAN_RxSet>> R_CAN_SW_SET_RX_TMO\n");
+			break;
+	   }
+	
+	/*R_BSP_SoftwareDelay(100, BSP_DELAY_MILLISECS);
+	R_CAN_RxSetMask(g_can_channel, CANBOX(2), 0x000);
+	R_BSP_SoftwareDelay(100, BSP_DELAY_MILLISECS);*/
+	//can_int_demo();
+	printf("After RxSet");
+	printf("\n");
+
+    /*  M A I N  L O O P  * * * * * * * * * * * * * * * * * * * * * * * */
+    
+    
+    while(1)
+    {
+	   rtn = R_CAN_RxPoll(g_can_channel, CANBOX(2));
+	   PORTE.PODR.BIT.B1 = 0;
+	   switch(rtn){
+	   	case R_CAN_OK:
+			printf("R_CAN_RxPoll>> R_CAN_OK\n");
+			PORTE.PODR.BIT.B4 = 0;
+			break;
+	   	case R_CAN_NOT_OK:
+			printf("R_CAN_RxPoll>> R_CAN_NOT_OK\n");
+			PORTE.PODR.BIT.B3 = 0;
+			break;
+	   	case R_CAN_RXPOLL_TMO:
+			printf("R_CAN_RxPoll>> R_CAN_RXPOLL_TMO\n");
+			PORTE.PODR.BIT.B2 = 0;
+			break;
+	   	case R_CAN_SW_BAD_MBX:
+			printf("R_CAN_RxPoll>> R_CAN_SW_BAD_MBX\n");
+			//PORTE.PODR.BIT.B1 = 0;
+			break;
+	   	case R_CAN_BAD_CH_NR:
+			printf("R_CAN_RxPoll>> R_CAN_BAD_CH_NR\n");
+			PORTE.PODR.BIT.B1 = 0;
+			PORTE.PODR.BIT.B2 = 0;
+			PORTE.PODR.BIT.B3 = 0;
+			PORTE.PODR.BIT.B4 = 0;
+			break;
+	   }
+	   R_BSP_SoftwareDelay(50, BSP_DELAY_MILLISECS);
+			PORTE.PODR.BIT.B2 = 1;
+			PORTE.PODR.BIT.B3 = 1;
+			PORTE.PODR.BIT.B4 = 1;
+	   R_BSP_SoftwareDelay(50, BSP_DELAY_MILLISECS);
+    }
+}/* end main() */
+
+bool CANBUS_Init(void){
+    uint32_t  api_status = R_CAN_OK;
 
     #if BSP_CFG_IO_LIB_ENABLE
         printf("\n\nStarting Tx-Rx Demo...\n");
         printf("R_CAN_Create() for channel %d, and provided user callback funcs.\n", g_can_channel);
     #endif
 
-    demo_output_ports_configure();
-
-    /* Blink LEDs. */
-    test_leds(30);
 
     /* Init CAN. */
     #if USE_CAN_POLL
@@ -198,18 +208,19 @@ void main(void)
         #endif
         while (1)
         {
+			return 1;
             /* Stop here and leave error displayed. */
         }
     }
-
+	
     /****************************************
     * Pick ONE R_CAN_PortSet call below!    *
     *****************************************/
     /* Normal CAN bus usage. */
-    api_status = R_CAN_PortSet(g_can_channel, ENABLE);
+    api_status = R_CAN_PortSet(g_can_channel, CAN_OPERATION);
 
     /* Initialize CAN mailboxes, and setup the demo receive and transmit dataframe variables. */
-    api_status |= init_can_app();
+    //api_status |= init_can_app();
 
     /* Is all OK after all CAN initialization? */
     if (api_status != R_CAN_OK)
@@ -218,58 +229,8 @@ void main(void)
         app_err_nr = APP_ERR_CAN_INIT;
     }
 	
-	tx_data.id         = 0x0001;
-	tx_data.dlc        = 8;
-    tx_data.data[0]     = 0xC1;
-    tx_data.data[1]     = 0xC3;
-    tx_data.data[2]     = 0xC5;
-    tx_data.data[3]     = 0xC7;
-    tx_data.data[4]     = 0xC9;
-    tx_data.data[5]     = 0xCB;
-    tx_data.data[6]     = 0xCD;
-    tx_data.data[7]     = 0xCF;
-	
-	printf("Before TxSet MB=1\n");
-	api_status |= R_CAN_TxSet(g_can_channel, CANBOX(2), &tx_data, DATA_FRAME);
-	printf("After TxSet MB=1");
-	printf("\n");
-
-    /*  M A I N  L O O P  * * * * * * * * * * * * * * * * * * * * * * * */
-    while(1)
-    {
-        /* User pressing switch(es)? */
-        read_switches();
-
-        /* Check for CAN errors. */
-        check_can_errors();
-
-        if (can_state[0] != R_CAN_STATUS_BUSOFF)
-        {
-            #if USE_CAN_POLL
-            can_poll_demo();
-            #else
-            can_int_demo();
-            #endif
-        }
-        else
-        /* Bus Off. */
-        {
-            /* handle_can_bus_state() will restart application. */
-            #if BSP_CFG_IO_LIB_ENABLE
-                printf("CAN IN BUSOFF :-(\n");
-            #endif
-        }
-        /* Reset receive/transmit indication every so often. */
-        if (led_show_count++ > NR_LOOPS_RESET_LEDS)
-        {
-            led_show_count = 0;
-            LED0 = LED_OFF;
-            LED1 = LED_OFF;
-            LED2 = LED_OFF;
-            LED3 = LED_OFF;
-        }
-    }
-}/* end main() */
+	return 0;
+}
 
 #if USE_CAN_POLL
 /*****************************************************************************
@@ -623,42 +584,6 @@ uint32_t reset_all_errors(uint8_t g_can_channel)
     return (status);
 }/* end reset_all_errors() */
 
-/******************************************************************************
-Function name:      test_leds
-Parameters:         -
-Return value:       -
-Description:        Blink the LEDs
-******************************************************************************/
-static void test_leds(uint32_t nr_led_flashes)
-{
-    uint32_t    i;
-    uint32_t    j = LED_DELAY;
-    uint8_t     led_time_sequence[] = {LED_ON, LED_OFF, LED_OFF, LED_OFF};
-
-    LED0 = LED_ON;
-    LED1 = LED_ON;
-    LED2 = LED_ON;
-    LED3 = LED_ON;
-
-    for (i = 0; i < nr_led_flashes; i++)
-    {
-        while(j--)
-        {
-            ;
-        }
-        j = LED_DELAY;
-
-        LED0 = led_time_sequence[i%4];
-        LED1 = led_time_sequence[(i + 1)%4];
-        LED2 = led_time_sequence[(i + 2)%4];
-        LED3 = led_time_sequence[(i + 3)%4];
-    }
-
-    LED0 = LED_OFF;
-    LED1 = LED_OFF;
-    LED2 = LED_OFF;
-    LED3 = LED_OFF;
-} /* end test_leds() */
 
 /*******************************************************************************
 
@@ -886,43 +811,3 @@ static void my_can_err2_callback(void)
 #endif
 #endif  //USE_CAN_POLL
 
-#ifdef __cplusplus
-void abort(void)
-{
-}
-#endif
-
-/***********************************************************************************************************************
-* Function name: output_ports_configure
-* Description  : Configures the port and pin direction settings, and sets the pin outputs to a safe level.
-* Arguments    : none
-* Return value : none
-***********************************************************************************************************************/
-static void demo_output_ports_configure(void)
-{
-    /* Enable LEDs. */
-    /* Start with LEDs off. */
-    LED0 = LED_OFF;
-    LED1 = LED_OFF;
-    LED2 = LED_OFF;
-    LED3 = LED_OFF;
-
-    /* Set LED pins as outputs. */
-    LED0_PDR = 1;
-    LED1_PDR = 1;
-    LED2_PDR = 1;
-    LED3_PDR = 1;
-
-    /* Enable switches. */
-    /* Set pins as inputs. */
-    SW1_PDR = 0;
-    SW2_PDR = 0;
-    SW3_PDR = 0;
-
-    /* Set port mode registers for switches. */
-    SW1_PMR = 0;
-    SW2_PMR = 0;
-    SW3_PMR = 0;
-}
-
-/* file end */

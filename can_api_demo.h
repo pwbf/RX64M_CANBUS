@@ -67,6 +67,11 @@ independent - not affecting neighboring mailboxes. */
 #define 	CANBOX_REMOTE_RX	(0x08)
 #define 	CANBOX_REMOTE_TX	(0x0C)	    /* Mailbox #12 */
 
+
+bool CANBUS_Init(void);
+bool CANBUS_Read();
+bool CANBUS_Send();
+
 /**********************************************************************************************************************
 Global variables and functions exported
 ***********************************************************************************************************************/

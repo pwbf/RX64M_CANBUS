@@ -129,19 +129,19 @@ void read_switches(void)
     if (SW1 == SW_ACTIVE)
     {
         current_sw_pos &= SW1_PRESSED;    /* SW1 is pressed. Clear SW1 bit */
-		printf("SW1\n");
+		//printf("SW1\n");
     }
 
     if (SW2 == SW_ACTIVE)
     {
         current_sw_pos &= SW2_PRESSED;    /* SW2 is pressed. Clear SW2 bit */
-		printf("SW2\n");
+		//printf("SW2\n");
     }
 
     if (SW3 == SW_ACTIVE)
     {
         current_sw_pos &= SW3_PRESSED;    /* SW3 is pressed. Clear SW3 bit */
-		printf("SW3\n");
+		//printf("SW3\n");
     }
 
     if (are_switches_stable(current_sw_pos))
