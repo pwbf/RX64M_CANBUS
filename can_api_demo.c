@@ -107,6 +107,9 @@ Macro definitions
  * CAN bus states Error Passive and Bus Off are handled by handle_can_bus_state(). */
 #define     ERROR_DIAG                  (0)   /* 1 on, 0 off. USE_CAN_POLL must be 0 if on. */
 
+#define     SW1 PORT7.PIDR.BIT.B4
+#define     LEDA PORTE.PODR.BIT.B1
+#define     LEDA_PDR PORTE.PDR.BIT.B1
 /***********************************************************************************************************************
  * Exported global variables
 ************************************************************************************************************************/
@@ -172,16 +175,11 @@ Description:    Main Can API demo program. See top of file.
 void main(void)
 {
     uint32_t  i, api_status = R_CAN_OK, bus_status, led_show_count;
-
+LEDA_PDR = 1;
     #if BSP_CFG_IO_LIB_ENABLE
         printf("\n\nStarting Tx-Rx Demo...\n");
         printf("R_CAN_Create() for channel %d, and provided user callback funcs.\n", g_can_channel);
     #endif
-
-    demo_output_ports_configure();
-
-    /* Blink LEDs. */
-    test_leds(30);
 
     /* Init CAN. */
     #if USE_CAN_POLL
@@ -218,56 +216,50 @@ void main(void)
         app_err_nr = APP_ERR_CAN_INIT;
     }
 	
-	tx_data.id         = 0x0001;
+	tx_data.id         = 0x0002;
 	tx_data.dlc        = 8;
-    tx_data.data[0]     = 0xC1;
-    tx_data.data[1]     = 0xC3;
-    tx_data.data[2]     = 0xC5;
-    tx_data.data[3]     = 0xC7;
-    tx_data.data[4]     = 0xC9;
-    tx_data.data[5]     = 0xCB;
-    tx_data.data[6]     = 0xCD;
-    tx_data.data[7]     = 0xCF;
+    tx_data.data[0]     = 0xD1;
+    tx_data.data[1]     = 0xD3;
+    tx_data.data[2]     = 0xD5;
+    tx_data.data[3]     = 0xD7;
+    tx_data.data[4]     = 0xD9;
+    tx_data.data[5]     = 0xDB;
+    tx_data.data[6]     = 0xDD;
+    tx_data.data[7]     = 0xDF;
 	
 	printf("Before TxSet MB=1\n");
-	api_status |= R_CAN_TxSet(g_can_channel, CANBOX(2), &tx_data, DATA_FRAME);
+	R_CAN_TxSet(g_can_channel, CANBOX(2), &tx_data, DATA_FRAME);
+	R_BSP_SoftwareDelay(100, BSP_DELAY_MILLISECS);
 	printf("After TxSet MB=1");
 	printf("\n");
-
+	
+	/*
+	printf("Before RxSet\n");
+	R_CAN_RxSet(g_can_channel, CANBOX(1), 0x0001, DATA_FRAME);
+	R_CAN_RxSet(g_can_channel, CANBOX(2), 0x0002, DATA_FRAME);
+	can_int_demo();
+	printf("After RxSet");
+	printf("\n");
+	*/
+	
     /*  M A I N  L O O P  * * * * * * * * * * * * * * * * * * * * * * * */
+    bool TxStatus = 0;
     while(1)
     {
-        /* User pressing switch(es)? */
-        read_switches();
-
-        /* Check for CAN errors. */
-        check_can_errors();
-
-        if (can_state[0] != R_CAN_STATUS_BUSOFF)
-        {
-            #if USE_CAN_POLL
-            can_poll_demo();
-            #else
-            can_int_demo();
-            #endif
-        }
-        else
-        /* Bus Off. */
-        {
-            /* handle_can_bus_state() will restart application. */
-            #if BSP_CFG_IO_LIB_ENABLE
-                printf("CAN IN BUSOFF :-(\n");
-            #endif
-        }
-        /* Reset receive/transmit indication every so often. */
-        if (led_show_count++ > NR_LOOPS_RESET_LEDS)
-        {
-            led_show_count = 0;
-            LED0 = LED_OFF;
-            LED1 = LED_OFF;
-            LED2 = LED_OFF;
-            LED3 = LED_OFF;
-        }
+	    if(SW1){
+	    	R_CAN_Tx(g_can_channel, CANBOX(2));
+		printf("Tx ");
+	    LEDA = 0;
+		break;
+	    }
+	    else{
+	    	R_CAN_TxStopMsg(g_can_channel, CANBOX(2));
+		printf("Stop ");
+	    LEDA = 0;
+	R_BSP_SoftwareDelay(100, BSP_DELAY_MILLISECS);
+	    LEDA = 1;
+	R_BSP_SoftwareDelay(100, BSP_DELAY_MILLISECS);
+	    }
     }
 }/* end main() */
 

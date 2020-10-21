@@ -832,7 +832,7 @@ uint32_t R_CAN_TxSet(const uint32_t         ch_nr,
         can_block_p->MIER.LONG |= (bit_set[mbox_nr]);
     #endif
 
-    api_status |= R_CAN_Tx(ch_nr, mbox_nr);
+    //api_status |= R_CAN_Tx(ch_nr, mbox_nr);
 
     return (api_status);
 }
@@ -924,8 +924,8 @@ uint32_t R_CAN_Tx(const uint32_t  ch_nr, const uint32_t  mbox_nr)
     can_block_p->MCTL[mbox_nr].BYTE = 0;
 
     /* Set TrmReq bit to "1" */
-    can_block_p->MCTL[mbox_nr].BIT.TX.TRMREQ = 1;
-
+    	//can_block_p->MCTL[mbox_nr].BIT.TX.TRMREQ = 1;
+	can_block_p->MCTL[mbox_nr].BYTE = 0x90;
     return (api_status);
 }
 /******************************************************************************

@@ -1,4 +1,4 @@
-Renesas Optimizing Linker (W3.02.00 )             18-Sep-2020 15:49:43
+Renesas Optimizing Linker (W3.02.00 )             24-Sep-2020 17:00:42
 
 *** Options ***
 
@@ -60,9 +60,9 @@ B_2
 R_2
                                   00001492  00001492         0   1
 B
-                                  00001494  00001da7       914   4
+                                  00001494  00001d77       8e4   4
 R
-                                  00001da8  00002043       29c   4
+                                  00001d78  0000200b       294   4
 $ADDR_C_120040
                                   00120040  00120043         4   1
 $ADDR_C_120048
@@ -82,21 +82,21 @@ C$BSEC
 C$VECT
                                   ffc004dc  ffc008db       400   4
 D
-                                  ffc008dc  ffc00b77       29c   4
+                                  ffc008dc  ffc00b6f       294   4
 D_1
-                                  ffc00b78  ffc00bc8        51   1
+                                  ffc00b70  ffc00bc0        51   1
 D_2
-                                  ffc00bc9  ffc00bc9         0   1
+                                  ffc00bc1  ffc00bc1         0   1
 W
-                                  ffc00bcc  ffc00bcc         0   4
+                                  ffc00bc4  ffc00bc4         0   4
 W_1
-                                  ffc00bcc  ffc00be8        1d   1
+                                  ffc00bc4  ffc00be0        1d   1
 W_2
-                                  ffc00bea  ffc00bea         0   2
+                                  ffc00be2  ffc00be2         0   2
 L
-                                  ffc00bec  ffc00eac       2c1   4
+                                  ffc00be4  ffc00d68       185   4
 P
-                                  ffc00ead  ffc05571      46c5   1
+                                  ffc00d69  ffc051be      4456   1
 EXCEPTVECT
                                   ffffff80  fffffffb        7c   4
 RESETVECT
