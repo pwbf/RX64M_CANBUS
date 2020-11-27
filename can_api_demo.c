@@ -107,9 +107,17 @@ Macro definitions
  * CAN bus states Error Passive and Bus Off are handled by handle_can_bus_state(). */
 #define     ERROR_DIAG                  (0)   /* 1 on, 0 off. USE_CAN_POLL must be 0 if on. */
 
+#define     USING_RSK			(0)
+
+#if USING_RSK == 0
+#define     SW1 PORT7.PIDR.BIT.B4
+#define     LEDA PORTE.PODR.BIT.B3
+#define     LEDA_PDR PORTE.PDR.BIT.B3
+#else
 #define     SW1 PORT1.PIDR.BIT.B5
 #define     LEDA PORT0.PODR.BIT.B3
 #define     LEDA_PDR PORT0.PDR.BIT.B3
+#endif
 /***********************************************************************************************************************
  * Exported global variables
 ************************************************************************************************************************/
@@ -227,10 +235,10 @@ LEDA_PDR = 1;
     tx_data.data[6]     = 0xDD;
     tx_data.data[7]     = 0xDF;
 	
-	printf("Before TxSet MB=1\n");
+	printf("Before TxSet MB=2 id=0x0002\n");
 	R_CAN_TxSet(g_can_channel, CANBOX(2), &tx_data, DATA_FRAME);
 	R_BSP_SoftwareDelay(100, BSP_DELAY_MILLISECS);
-	printf("After TxSet MB=1");
+	printf("After TxSet MB=2 id=0x0002");
 	printf("\n");
 	
 	/*
@@ -246,7 +254,11 @@ LEDA_PDR = 1;
     bool TxStatus = 0;
     while(1)
     {
+#if USING_RSK==0
+	    if(SW1){
+#else
 	    if(!SW1){
+#endif
 	    	R_CAN_Tx(g_can_channel, CANBOX(2));
 		printf("Tx ");
 	    LEDA = 0;
