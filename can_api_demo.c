@@ -104,87 +104,6 @@ Description:    Main Can API demo program. See top of file.
 uint8_t rtn = 0;
 void main(void)
 {
-	PORTE.PDR.BIT.B1 = 1;
-	PORTE.PDR.BIT.B2 = 1;
-	PORTE.PDR.BIT.B3 = 1;
-	PORTE.PDR.BIT.B4 = 1;
-	if(CANBUS_Init()){
-		while(1U){
-			printf("CAN BUS Initial failed\n");
-		}
-	}
-
-	printf("Before RxSet\n");
-	/*R_CAN_RxSet(g_can_channel, CANBOX(1), 0x0001, DATA_FRAME);
-	R_BSP_SoftwareDelay(100, BSP_DELAY_MILLISECS);*/
-	rtn = R_CAN_RxSet(g_can_channel, CANBOX(2), 0x0002, DATA_FRAME);
-	
-	switch(rtn){
-	   	case R_CAN_OK:
-			printf("R_CAN_RxSet>> R_CAN_OK\n");
-			break;
-	   	case R_CAN_SW_BAD_MBX:
-			printf("R_CAN_RxSet>> R_CAN_SW_BAD_MBX\n");
-			break;
-	   	case R_CAN_BAD_CH_NR:
-			printf("R_CAN_RxSet>> R_CAN_BAD_CH_NR\n");
-			break;
-	   	case R_CAN_SW_SET_TX_TMO:
-			printf("R_CAN_RxSet>> R_CAN_SW_SET_TX_TMO\n");
-			break;
-	   	case R_CAN_SW_SET_RX_TMO:
-			printf("R_CAN_RxSet>> R_CAN_SW_SET_RX_TMO\n");
-			break;
-	   }
-	
-	/*R_BSP_SoftwareDelay(100, BSP_DELAY_MILLISECS);
-	R_CAN_RxSetMask(g_can_channel, CANBOX(2), 0x000);
-	R_BSP_SoftwareDelay(100, BSP_DELAY_MILLISECS);*/
-	//can_int_demo();
-	printf("After RxSet");
-	printf("\n");
-
-    /*  M A I N  L O O P  * * * * * * * * * * * * * * * * * * * * * * * */
-    
-    
-    while(1)
-    {
-	   rtn = R_CAN_RxPoll(g_can_channel, CANBOX(2));
-	   PORTE.PODR.BIT.B1 = 0;
-	   switch(rtn){
-	   	case R_CAN_OK:
-			printf("R_CAN_RxPoll>> R_CAN_OK\n");
-			PORTE.PODR.BIT.B4 = 0;
-			break;
-	   	case R_CAN_NOT_OK:
-			printf("R_CAN_RxPoll>> R_CAN_NOT_OK\n");
-			PORTE.PODR.BIT.B3 = 0;
-			break;
-	   	case R_CAN_RXPOLL_TMO:
-			printf("R_CAN_RxPoll>> R_CAN_RXPOLL_TMO\n");
-			PORTE.PODR.BIT.B2 = 0;
-			break;
-	   	case R_CAN_SW_BAD_MBX:
-			printf("R_CAN_RxPoll>> R_CAN_SW_BAD_MBX\n");
-			//PORTE.PODR.BIT.B1 = 0;
-			break;
-	   	case R_CAN_BAD_CH_NR:
-			printf("R_CAN_RxPoll>> R_CAN_BAD_CH_NR\n");
-			PORTE.PODR.BIT.B1 = 0;
-			PORTE.PODR.BIT.B2 = 0;
-			PORTE.PODR.BIT.B3 = 0;
-			PORTE.PODR.BIT.B4 = 0;
-			break;
-	   }
-	   R_BSP_SoftwareDelay(50, BSP_DELAY_MILLISECS);
-			PORTE.PODR.BIT.B2 = 1;
-			PORTE.PODR.BIT.B3 = 1;
-			PORTE.PODR.BIT.B4 = 1;
-	   R_BSP_SoftwareDelay(50, BSP_DELAY_MILLISECS);
-    }
-}/* end main() */
-
-bool CANBUS_Init(void){
     uint32_t  api_status = R_CAN_OK;
 
     #if BSP_CFG_IO_LIB_ENABLE
@@ -228,9 +147,84 @@ bool CANBUS_Init(void){
         api_status = R_CAN_OK;
         app_err_nr = APP_ERR_CAN_INIT;
     }
+
+	printf("Before RxSet\n");
+	/*R_CAN_RxSet(g_can_channel, CANBOX(1), 0x0001, DATA_FRAME);
+	R_BSP_SoftwareDelay(100, BSP_DELAY_MILLISECS);*/
+	rtn = R_CAN_RxSet(g_can_channel, CANBOX(2), 0x0002, REMOTE_FRAME);
+	switch(rtn){
+	   	case R_CAN_OK:
+			printf("R_CAN_RxSet>> R_CAN_OK\n");
+			break;
+	   	case R_CAN_SW_BAD_MBX:
+			printf("R_CAN_RxSet>> R_CAN_SW_BAD_MBX\n");
+			break;
+	   	case R_CAN_BAD_CH_NR:
+			printf("R_CAN_RxSet>> R_CAN_BAD_CH_NR\n");
+			break;
+	   	case R_CAN_SW_SET_TX_TMO:
+			printf("R_CAN_RxSet>> R_CAN_SW_SET_TX_TMO\n");
+			break;
+	   	case R_CAN_SW_SET_RX_TMO:
+			printf("R_CAN_RxSet>> R_CAN_SW_SET_RX_TMO\n");
+			break;
+	   }
 	
-	return 0;
-}
+	/*R_BSP_SoftwareDelay(100, BSP_DELAY_MILLISECS);
+	R_CAN_RxSetMask(g_can_channel, CANBOX(2), 0x000);
+	R_BSP_SoftwareDelay(100, BSP_DELAY_MILLISECS);*/
+	//can_int_demo();
+	printf("After RxSet");
+	printf("\n");
+
+    /*  M A I N  L O O P  * * * * * * * * * * * * * * * * * * * * * * * */
+    PORT2.PDR.BIT.B6 = 1;
+    
+    while(1)
+    {
+	   /*
+	   PORT2.PODR.BIT.B6 = 0;
+	   R_BSP_SoftwareDelay(100, BSP_DELAY_MILLISECS);
+	   PORT2.PODR.BIT.B6 = 1;
+	   R_BSP_SoftwareDelay(100, BSP_DELAY_MILLISECS);
+	   */
+	   
+	   rtn = R_CAN_RxPoll(g_can_channel, CANBOX(2));
+	   PORTE.PODR.BIT.B1 = 0;
+	   switch(rtn){
+	   	case R_CAN_OK:
+			printf("R_CAN_RxPoll>> R_CAN_OK\n");
+			PORTE.PODR.BIT.B4 = 0;
+			break;
+	   	case R_CAN_NOT_OK:
+			printf("R_CAN_RxPoll>> R_CAN_NOT_OK\n");
+			PORTE.PODR.BIT.B3 = 0;
+			break;
+	   	case R_CAN_RXPOLL_TMO:
+			printf("R_CAN_RxPoll>> R_CAN_RXPOLL_TMO\n");
+			PORTE.PODR.BIT.B2 = 0;
+			break;
+	   	case R_CAN_SW_BAD_MBX:
+			printf("R_CAN_RxPoll>> R_CAN_SW_BAD_MBX\n");
+			//PORTE.PODR.BIT.B1 = 0;
+			break;
+	   	case R_CAN_BAD_CH_NR:
+			printf("R_CAN_RxPoll>> R_CAN_BAD_CH_NR\n");
+			PORTE.PODR.BIT.B1 = 0;
+			PORTE.PODR.BIT.B2 = 0;
+			PORTE.PODR.BIT.B3 = 0;
+			PORTE.PODR.BIT.B4 = 0;
+			break;
+	   }
+	   R_BSP_SoftwareDelay(50, BSP_DELAY_MILLISECS);
+			PORTE.PODR.BIT.B2 = 1;
+			PORTE.PODR.BIT.B3 = 1;
+			PORTE.PODR.BIT.B4 = 1;
+	   R_BSP_SoftwareDelay(50, BSP_DELAY_MILLISECS);
+	   
+    }
+}/* end main() */
+
 
 #if USE_CAN_POLL
 /*****************************************************************************
