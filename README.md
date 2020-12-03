@@ -1,7 +1,7 @@
 # RX64M_CANBUS  
 ## 2020/12/3   
-> ### Recieve Testing succeed(sort of) 
-Recieving Okay, but only if one node(Tranciever) is R2A25416SP
+> ### Recieve Testing succeed 
+Recieving Okay, TI+TI or TI+Re
 ## 2020/10/20  
 > ### Recieve Testing  
 Signal Level Fixed, still receiving nothing
