@@ -136,8 +136,9 @@ void main(void)
     * Pick ONE R_CAN_PortSet call below!    *
     *****************************************/
     /* Normal CAN bus usage. */
-    api_status = R_CAN_PortSet(g_can_channel, CAN_OPERATION);
-
+    //api_status = R_CAN_PortSet(g_can_channel, CAN_OPERATION);
+    api_status = R_CAN_PortSet(g_can_channel, CAN_RESET);
+	api_status |= init_can_app();
     /* Initialize CAN mailboxes, and setup the demo receive and transmit dataframe variables. */
     //api_status |= init_can_app();
 
@@ -151,7 +152,8 @@ void main(void)
 	printf("Before RxSet\n");
 	/*R_CAN_RxSet(g_can_channel, CANBOX(1), 0x0001, DATA_FRAME);
 	R_BSP_SoftwareDelay(100, BSP_DELAY_MILLISECS);*/
-	rtn = R_CAN_RxSet(g_can_channel, CANBOX(2), 0x0002, REMOTE_FRAME);
+	rtn = R_CAN_RxSet(g_can_channel, CANBOX(2), 0x0002, DATA_FRAME);
+	//rtn = R_CAN_RxSet(g_can_channel, CANBOX(2), 0x0002, REMOTE_FRAME);
 	switch(rtn){
 	   	case R_CAN_OK:
 			printf("R_CAN_RxSet>> R_CAN_OK\n");
