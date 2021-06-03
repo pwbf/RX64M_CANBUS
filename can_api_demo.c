@@ -122,7 +122,7 @@ Macro definitions
  * Exported global variables
 ************************************************************************************************************************/
 /* Demo data */
-can_frame_t  tx_dataframe, tx_data, rx_dataframe, remote_frame;
+can_frame_t  tx_dataframe, tx_data, tx_data2, rx_dataframe, remote_frame;
 
 /* RSK+ 64M uses CAN0 (channel 0). */
 uint32_t    g_can_channel = CH_0;
@@ -180,6 +180,8 @@ Parameters:     -
 Returns:        -
 Description:    Main Can API demo program. See top of file.
 ***********************************************************************************************************************/
+uint8_t speedNow = 99;
+uint8_t gearNow = 6;
 void main(void)
 {
     uint32_t  i, api_status = R_CAN_OK, bus_status, led_show_count;
@@ -224,31 +226,43 @@ LEDA_PDR = 1;
         app_err_nr = APP_ERR_CAN_INIT;
     }
 	
-	tx_data.id         = 0x0002;
+	tx_data.id         = 0x18FEBF0B;
+	//tx_data.id         = 0xAF;
 	tx_data.dlc        = 8;
-    tx_data.data[0]     = 0xD1;
-    tx_data.data[1]     = 0xD3;
-    tx_data.data[2]     = 0xD5;
-    tx_data.data[3]     = 0xD7;
-    tx_data.data[4]     = 0xD9;
-    tx_data.data[5]     = 0xDB;
-    tx_data.data[6]     = 0xDD;
-    tx_data.data[7]     = 0xDF;
+    tx_data.data[0]     = speedNow;
+    tx_data.data[1]     = 0x00;
+    tx_data.data[2]     = 0x00;
+    tx_data.data[3]     = 0x00;
+    tx_data.data[4]     = 0x00;
+    tx_data.data[5]     = 0x00;
+    tx_data.data[6]     = 0x00;
+    tx_data.data[7]     = 0x00;
+    
+    tx_data2.id		= 0x0C01FF05;
+    tx_data2.dlc        = 8;
+    tx_data2.data[0]     = gearNow;
+    tx_data2.data[1]     = 0x00;
+    tx_data2.data[2]     = 0x00;
+    tx_data2.data[3]     = 0x00;
+    tx_data2.data[4]     = 0x00;
+    tx_data2.data[5]     = 0x00;
+    tx_data2.data[6]     = 0x00;
+    tx_data2.data[7]     = 0x00;
 	
-	printf("Before TxSet MB=2 id=0x0002\n");
+	/*printf("Before TxSet MB=2 Sid=0xAF\n");
 	R_CAN_TxSet(g_can_channel, CANBOX(2), &tx_data, DATA_FRAME);
 	R_BSP_SoftwareDelay(100, BSP_DELAY_MILLISECS);
-	printf("After TxSet MB=2 id=0x0002");
+	printf("After TxSet MB=2 Sid=0xAF");*/
+	printf("Before TxSet MB=2 Eid=0x18FEBF0B\n");
+	R_CAN_TxSetXid(g_can_channel, CANBOX(2), &tx_data, DATA_FRAME);
+	R_BSP_SoftwareDelay(100, BSP_DELAY_MILLISECS);
+	printf("After TxSet MB=2 Eid=0x18FEBF0B");
+	printf("Before TxSet MB=3 Eid=0x0C01FF05\n");
+	R_CAN_TxSetXid(g_can_channel, CANBOX(3), &tx_data2, DATA_FRAME);
+	R_BSP_SoftwareDelay(100, BSP_DELAY_MILLISECS);
+	printf("After TxSet MB=3 Eid=0x0C01FF05");
 	printf("\n");
 	
-	/*
-	printf("Before RxSet\n");
-	R_CAN_RxSet(g_can_channel, CANBOX(1), 0x0001, DATA_FRAME);
-	R_CAN_RxSet(g_can_channel, CANBOX(2), 0x0002, DATA_FRAME);
-	can_int_demo();
-	printf("After RxSet");
-	printf("\n");
-	*/
 	
     /*  M A I N  L O O P  * * * * * * * * * * * * * * * * * * * * * * * */
     bool TxStatus = 0;
@@ -260,6 +274,7 @@ LEDA_PDR = 1;
 	    if(!SW1){
 #endif
 	    	R_CAN_Tx(g_can_channel, CANBOX(2));
+	    	R_CAN_Tx(g_can_channel, CANBOX(3));
 		printf("Tx ");
 	    LEDA = 0;
 		break;
