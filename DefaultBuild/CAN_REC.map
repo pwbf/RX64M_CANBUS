@@ -1,0 +1,103 @@
+Renesas Optimizing Linker (W3.03.00 )             03-Jun-2021 18:59:35
+
+*** Options ***
+
+-MAKEUD=DefaultBuild\CAN_REC.lk.ud
+-subcommand=DefaultBuild\CAN_REC.clnk
+-library=DefaultBuild\CAN_REC.lib
+-input=DefaultBuild\r_cg_hardware_setup.obj
+-input=DefaultBuild\r_smc_cgc.obj
+-input=DefaultBuild\r_smc_cgc_user.obj
+-input=DefaultBuild\r_smc_interrupt.obj
+-input=DefaultBuild\hwsetup.obj
+-input=DefaultBuild\dbsct.obj
+-input=DefaultBuild\lowlvl.obj
+-input=DefaultBuild\lowsrc.obj
+-input=DefaultBuild\mcu_locks.obj
+-input=DefaultBuild\resetprg.obj
+-input=DefaultBuild\r_bsp_common.obj
+-input=DefaultBuild\r_bsp_cpu.obj
+-input=DefaultBuild\r_bsp_interrupts.obj
+-input=DefaultBuild\r_bsp_locking.obj
+-input=DefaultBuild\r_bsp_mcu_startup.obj
+-input=DefaultBuild\r_bsp_software_interrupt.obj
+-input=DefaultBuild\r_rx_intrinsic_functions.obj
+-input=DefaultBuild\sbrk.obj
+-input=DefaultBuild\mcu_clocks.obj
+-input=DefaultBuild\mcu_init.obj
+-input=DefaultBuild\mcu_interrupts.obj
+-input=DefaultBuild\mcu_mapped_interrupts.obj
+-input=DefaultBuild\vecttbl.obj
+-input=DefaultBuild\Pin.obj
+-input=DefaultBuild\r_can_rx.obj
+-input=DefaultBuild\CAN_REC.obj
+-input=DefaultBuild\can_process.obj
+-noprelink
+-output=DefaultBuild\CAN_REC.abs
+-vect=_undefined_interrupt_source_isr
+-list=DefaultBuild\CAN_REC.map
+-nooptimize
+-start=SU,SI,B_1,R_1,B_2,R_2,B,R/4,C_1,C_2,C,C$*,D*,W*,L,P*/FFC00000,EXCEPTVECT/FFFFFF80,RESETVECT/FFFFFFFC
+-rom=D=R,D_1=R_1,D_2=R_2
+-nologo
+-end
+
+*** Error information ***
+
+*** Mapping List ***
+
+SECTION                            START      END         SIZE   ALIGN
+SU
+                                  00000004  00001003      1000   4
+SI
+                                  00001004  00001403       400   4
+B_1
+                                  00001404  00001433        30   1
+R_1
+                                  00001434  00001504        d1   1
+B_2
+                                  00001506  0000150d         8   2
+R_2
+                                  0000150e  0000150e         0   1
+B
+                                  00001510  00001e13       904   4
+R
+                                  00001e14  000020b7       2a4   4
+$ADDR_C_120040
+                                  00120040  00120043         4   1
+$ADDR_C_120048
+                                  00120048  0012004b         4   1
+$ADDR_C_120050
+                                  00120050  0012006f        20   1
+C_1
+                                  ffc00000  ffc000d1        d2   1
+C_2
+                                  ffc000d2  ffc002d9       208   2
+C
+                                  ffc002dc  ffc00487       1ac   4
+C$DSEC
+                                  ffc00488  ffc004ab        24   4
+C$BSEC
+                                  ffc004ac  ffc004c3        18   4
+C$VECT
+                                  ffc004c4  ffc008c3       400   4
+D
+                                  ffc008c4  ffc00b67       2a4   4
+D_1
+                                  ffc00b68  ffc00c38        d1   1
+D_2
+                                  ffc00c39  ffc00c39         0   1
+W
+                                  ffc00c3c  ffc00c3c         0   4
+W_1
+                                  ffc00c3c  ffc00c58        1d   1
+W_2
+                                  ffc00c5a  ffc00c5a         0   2
+L
+                                  ffc00c5c  ffc00e60       205   4
+P
+                                  ffc00e61  ffc05380      4520   1
+EXCEPTVECT
+                                  ffffff80  fffffffb        7c   4
+RESETVECT
+                                  fffffffc  ffffffff         4   4
