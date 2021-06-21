@@ -17,18 +17,20 @@ void main(void)
  	CANBUS_Init();
 	CANBOX_SET();
 	GPIO_init();
-	//while(1)
-	DisplayControl(1,2,3,4);
+	
+	//DisplayControl(1,2,3,4);
     while(1)
     {
-	//CHK_ALL_MB();
+	CHK_ALL_MB();
+	
+	//如果CANBUS return = R_CAN_OK, 將數值讀回
 	if(STATUS_WHEEL_SPEED_INFO == R_CAN_OK){
 		R_CAN_RxRead(CAN_CHANNEL_SET, MAILBOX_ID_SPEED_INFO ,&SPEED_DATA);
-		//SHOW_DATA();
+		SHOW_DATA();
 	}
 	if(STATUS_TRANSMISSION_INFO == R_CAN_OK){
 		R_CAN_RxRead(CAN_CHANNEL_SET, MAILBOX_ID_TRANS_CTRL ,&TRANS_DATA);
-		//SHOW_DATA();
+		SHOW_DATA();
 	}
 	SHOW_DATA();
 	R_BSP_SoftwareDelay(5, BSP_DELAY_MILLISECS);
@@ -50,43 +52,61 @@ void CHK_ALL_MB(void){
 }
 
 void SHOW_DATA(void){
-	uint32_t speedNow = SPEED_DATA.data[0];
-	uint32_t speedDigit[3] = {0,0,0};
+	uint32_t rpmNow = SPEED_DATA.data[1]*256 | SPEED_DATA.data[0];	//誰是high誰是low待確認
+	vehicleSpeed = WHEEL_DIA * rpmNow * 0.1885;				//v = Dia * RPM * 0.1885
+	uint8_t speedDigit[3] = {0,0,0};
+	vehicleGear = TRANS_DATA.data[2];
 	
-	if(speedNow < 1000){
-		speedDigit[2] = speedNow % 10;
-		speedNow /= 10;
-		speedDigit[1] = speedNow % 10;
-		speedNow /= 10;
-		speedDigit[0] = speedNow % 10;
+	//拆解速度值為三位元資訊(for 7段顯示器)
+	if(vehicleSpeed < 1000){
+		speedDigit[2] = vehicleSpeed % 10;
+		vehicleSpeed /= 10;
+		speedDigit[1] = vehicleSpeed % 10;
+		vehicleSpeed /= 10;
+		speedDigit[0] = vehicleSpeed % 10;
 	}
 	else{
 		speedDigit[2] = 9;
 		speedDigit[1] = 9;
 		speedDigit[0] = 9;
 	}
-	printf("Speed Data: 0x%04X(%d)\n", speedNow, speedNow);
-	/*printf("Data[0] = 0x%02X(%d)\n", SPEED_DATA.data[0]);
-	printf("Data[1] = 0x%02X(%d)\n", SPEED_DATA.data[1]);
-	printf("Data[2] = 0x%02X(%d)\n", SPEED_DATA.data[2]);
-	printf("Data[3] = 0x%02X(%d)\n", SPEED_DATA.data[3]);
-	printf("Data[4] = 0x%02X(%d)\n", SPEED_DATA.data[4]);
-	printf("Data[5] = 0x%02X(%d)\n", SPEED_DATA.data[5]);
-	printf("Data[6] = 0x%02X(%d)\n", SPEED_DATA.data[6]);
-	printf("Data[7] = 0x%02X(%d)\n", SPEED_DATA.data[7]);
-	printf("Data[8] = 0x%02X(%d)\n\n", SPEED_DATA.data[8]);*/
-	printf("Transmission Data: (%d)\n", TRANS_DATA.data[0]);
-	/*printf("Data[0] = 0x%02X(%d)\n", TRANS_DATA.data[0]);
-	printf("Data[1] = 0x%02X(%d)\n", TRANS_DATA.data[1]);
-	printf("Data[2] = 0x%02X(%d)\n", TRANS_DATA.data[2]);
-	printf("Data[3] = 0x%02X(%d)\n", TRANS_DATA.data[3]);
-	printf("Data[4] = 0x%02X(%d)\n", TRANS_DATA.data[4]);
-	printf("Data[5] = 0x%02X(%d)\n", TRANS_DATA.data[5]);
-	printf("Data[6] = 0x%02X(%d)\n", TRANS_DATA.data[6]);
-	printf("Data[7] = 0x%02X(%d)\n", TRANS_DATA.data[7]);
-	printf("Data[8] = 0x%02X(%d)\n\n", TRANS_DATA.data[8]);*/
-	printf("Display: %d %d %d %d\n", TRANS_DATA.data[0],speedDigit[0],speedDigit[1],speedDigit[2]);
-	DisplayControl(TRANS_DATA.data[0],speedDigit[0],speedDigit[1],speedDigit[2]);
+	
+	printf("Speed Data: [0] 0x%02X | [1] 0x%02X\n", SPEED_DATA.data[0], SPEED_DATA.data[1]);
+	printf("rpmNow: 0x%04X(%d)\n", rpmNow, rpmNow);
+	printf("vehicleSpeed: 0x%04X(%d)\n", vehicleSpeed, vehicleSpeed);
+	printf("Gear Data: 0x%02X\n", vehicleGear);
+	
+	//轉換CANBUS數值為實際檔位資訊
+	switch(vehicleGear){
+		case 0x7C:
+			printf("Gear Now[R]\n");
+			break;
+		case 0x7D:
+			printf("Gear Now[N]\n");
+			break;
+		case 0xFC:
+			printf("Gear Now[D]\n");
+			break;
+		case 0xF1:
+			printf("Gear Now[1]\n");
+			break;
+		case 0xF2:
+			printf("Gear Now[2]\n");
+			break;
+		case 0xF3:
+			printf("Gear Now[3]\n");
+			break;
+		case 0xF4:
+			printf("Gear Now[4]\n");
+			break;
+		case 0xF5:
+			printf("Gear Now[5]\n");
+			break;
+		
+	}
+	
+	printf("Display: %d %d %d %d\n", TRANS_DATA.data[0],speedDigit[0],speedDigit[1],speedDigit[2]);		//檢查會送到7段顯示器上的數值
+	// DisplayControl(TRANS_DATA.data[0],speedDigit[0],speedDigit[1],speedDigit[2]); //先不顯示到7段顯示器上
 	printf("\n");
 }
 

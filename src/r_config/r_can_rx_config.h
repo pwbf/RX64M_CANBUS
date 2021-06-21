@@ -167,7 +167,7 @@ mailboxes for messages sent and received. */
      *      ============
      *      SUM = 24
      */
-#define BITRATE    (500000)
+#define BITRATE    (250000)
 #define CAN_BRP     (5)
 #define CAN_TSEG1   (15)
 #define CAN_TSEG2   (8)

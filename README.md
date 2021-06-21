@@ -1,4 +1,7 @@
 # RX64M_CANBUS  
+## 2021/06/21   
+> ### Set Mailbox for Speed and Gear data  
+> ### Set bitrate to 250KHZ (r_can_rx_config.h)  
 ## 2020/12/3   
 > ### Recieve Testing succeed 
 Recieving Okay, TI+TI or TI+Re
