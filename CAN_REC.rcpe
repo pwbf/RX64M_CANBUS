@@ -1,16 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <MicomToolCommonProjectFile Version="1.00">
-  <CreatorType Name="CubeSuite+" Version="V8.04.00  [09 Jun 2020]" />
+  <CreatorType Name="CubeSuite+" Version="V8.05.00  [26 Nov 2020]" />
   <Placeholders>
     <PlaceholderPrefix>%</PlaceholderPrefix>
     <PlaceholderPostfix>%</PlaceholderPostfix>
   </Placeholders>
-  <Project Name="172CAN_2" Type="Application">
+  <Project Name="CAN_REC" Type="Application">
     <Files>
-      <Path>can_api_demo.h</Path>
-      <Path>rskrx64m.h</Path>
-      <Path>switches.c</Path>
-      <Path>can_api_demo.c</Path>
+      <Path>CAN_REC.h</Path>
+      <Path>CAN_REC.c</Path>
+      <Category Name="CANBUS_process">
+        <Path>src\CANBUS_process\can_process.c</Path>
+        <Path>src\CANBUS_process\can_process.h</Path>
+      </Category>
       <Category Name="src">
         <Category Name="general">
           <Path>src\general\r_cg_hardware_setup.c</Path>
@@ -122,6 +124,7 @@
           <Path>src\r_can_rx\src\r_can_rx.c</Path>
         </Category>
       </Category>
+      <Path>segmentDisplay.h</Path>
     </Files>
     <DebugOptions>
       <ConnectSettings>
@@ -130,7 +133,7 @@
       <DebugToolSettings />
     </DebugOptions>
     <Device Series="RX">R5F564MLCxFC</Device>
-    <BuildOptions Name="CC-RX" Version="V3.02.00">
+    <BuildOptions Name="CC-RX" Version="V3.03.00">
       <BuildMode Name="DefaultBuild" Active="True">
         <GeneralOptions>
           <SimultaneouslyBuild>false</SimultaneouslyBuild>
@@ -139,6 +142,7 @@
           <Option>-isa=rxv2</Option>
           <Option>-fpu</Option>
           <Option>-lang=c99</Option>
+          <Option>-include=src\CANBUS_process</Option>
           <Option>-include=.</Option>
           <Option>-include=src\r_can_rx\ref</Option>
           <Option>-include=src\r_can_rx</Option>
@@ -213,10 +217,11 @@
           <Path>DefaultBuild\vecttbl.obj</Path>
           <Path>DefaultBuild\Pin.obj</Path>
           <Path>DefaultBuild\r_can_rx.obj</Path>
-          <Path>DefaultBuild\switches.obj</Path>
-          <Path>DefaultBuild\can_api_demo.obj</Path>
+          <Path>DefaultBuild\CAN_REC.obj</Path>
+          <Path>DefaultBuild\can_process.obj</Path>
         </LinkOrder>
         <CommonOptions>
+          <IncludePathForC>src\CANBUS_process</IncludePathForC>
           <IncludePathForC>.</IncludePathForC>
           <IncludePathForC>src\r_can_rx\ref</IncludePathForC>
           <IncludePathForC>src\r_can_rx</IncludePathForC>
@@ -234,8 +239,8 @@
     </BuildOptions>
     <Extension_SmcCodePart>
       <CodeGeneratorData></CodeGeneratorData>
-      <GenerateFileFolder>D:\RX64M\LAB\CAN_bus\172CAN_2</GenerateFileFolder>
-      <SCFGFile>172CAN_2.scfg</SCFGFile>
+      <GenerateFileFolder>D:\RX64M\LAB\CAN_bus\CAN_REC</GenerateFileFolder>
+      <SCFGFile>CAN_REC.scfg</SCFGFile>
       <SmcExePath>C:\Program Files (x86)\Renesas Electronics\SmartConfigurator\RX\eclipse\SmartConfigurator.exe</SmcExePath>
       <CodeGeneratorFilesGuid>11e9d8e4-9e24-454e-a855-a859251f211f</CodeGeneratorFilesGuid>
     </Extension_SmcCodePart>

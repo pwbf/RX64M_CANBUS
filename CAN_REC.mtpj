@@ -1,41 +1,32 @@
 ﻿<CubeSuiteProject>
-  <ProductVersion>9.04.00.00</ProductVersion>
+  <ProductVersion>9.05.00.00</ProductVersion>
   <Class Guid="68f4a651-b9cd-473b-a595-b00447132ffa">
     <Instance Guid="00000000-0000-0000-0000-000000000000">
       <FormatVersion>2.0</FormatVersion>
-      <FileVersion>9.4</FileVersion>
+      <FileVersion>9.5</FileVersion>
       <ProjectGuid>38395ad9-6907-4d96-a6e2-f63e57b883aa</ProjectGuid>
       <ProjectItemGuid>8298c48b-98bc-437f-9237-41ebfcc168c5</ProjectItemGuid>
       <FileCategoryGuid>a158a3c7-6b4d-4b12-a2d0-83acc110bf7c</FileCategoryGuid>
       <Property>fb98844b-2c27-4275-9804-f6e63e204da0</Property>
       <ActiveProjectGuid>38395ad9-6907-4d96-a6e2-f63e57b883aa</ActiveProjectGuid>
     </Instance>
-    <Instance Guid="861b8dd3-5d23-4d27-b5e5-f0b2d34602bd">
-      <Name>can_api_demo.h</Name>
+    <Instance Guid="480211a4-a2c4-4c47-9fd6-7aed24eb8b12">
+      <Name>CAN_REC.h</Name>
       <Type>File</Type>
-      <RelativePath>can_api_demo.h</RelativePath>
+      <RelativePath>CAN_REC.h</RelativePath>
       <TreeImageGuid>03cad1e8-2eb3-4cde-a8a3-982423631122</TreeImageGuid>
-      <ParentItem>a158a3c7-6b4d-4b12-a2d0-83acc110bf7c</ParentItem>
-    </Instance>
-    <Instance Guid="f5877da0-53cc-4d47-a21a-580605d4a687">
-      <Name>rskrx64m.h</Name>
-      <Type>File</Type>
-      <RelativePath>rskrx64m.h</RelativePath>
-      <TreeImageGuid>03cad1e8-2eb3-4cde-a8a3-982423631122</TreeImageGuid>
-      <ParentItem>a158a3c7-6b4d-4b12-a2d0-83acc110bf7c</ParentItem>
-    </Instance>
-    <Instance Guid="72c5b710-b9cb-47b6-843a-154925799010">
-      <Name>switches.c</Name>
-      <Type>File</Type>
-      <RelativePath>switches.c</RelativePath>
-      <TreeImageGuid>941832c1-fc3b-4e1b-94e8-01ea17128b42</TreeImageGuid>
       <ParentItem>a158a3c7-6b4d-4b12-a2d0-83acc110bf7c</ParentItem>
     </Instance>
     <Instance Guid="9954c4f5-f6c5-4306-ad79-0746ec807a64">
-      <Name>can_api_demo.c</Name>
+      <Name>CAN_REC.c</Name>
       <Type>File</Type>
-      <RelativePath>can_api_demo.c</RelativePath>
+      <RelativePath>CAN_REC.c</RelativePath>
       <TreeImageGuid>941832c1-fc3b-4e1b-94e8-01ea17128b42</TreeImageGuid>
+      <ParentItem>a158a3c7-6b4d-4b12-a2d0-83acc110bf7c</ParentItem>
+    </Instance>
+    <Instance Guid="178dcc2e-fa85-46c2-bb3b-4607aa72f79d">
+      <Name>CANBUS_process</Name>
+      <Type>Category</Type>
       <ParentItem>a158a3c7-6b4d-4b12-a2d0-83acc110bf7c</ParentItem>
     </Instance>
     <Instance Guid="11e9d8e4-9e24-454e-a855-a859251f211f">
@@ -47,6 +38,27 @@
       <Name>r_can_rx</Name>
       <Type>Category</Type>
       <ParentItem>a158a3c7-6b4d-4b12-a2d0-83acc110bf7c</ParentItem>
+    </Instance>
+    <Instance Guid="a4253b20-1be6-434a-8761-fc0c62635c31">
+      <Name>segmentDisplay.h</Name>
+      <Type>File</Type>
+      <RelativePath>segmentDisplay.h</RelativePath>
+      <TreeImageGuid>03cad1e8-2eb3-4cde-a8a3-982423631122</TreeImageGuid>
+      <ParentItem>a158a3c7-6b4d-4b12-a2d0-83acc110bf7c</ParentItem>
+    </Instance>
+    <Instance Guid="28f5a7ae-06a5-416b-84c8-e7e60d0e2065">
+      <Name>can_process.c</Name>
+      <Type>File</Type>
+      <RelativePath>src\CANBUS_process\can_process.c</RelativePath>
+      <TreeImageGuid>941832c1-fc3b-4e1b-94e8-01ea17128b42</TreeImageGuid>
+      <ParentItem>178dcc2e-fa85-46c2-bb3b-4607aa72f79d</ParentItem>
+    </Instance>
+    <Instance Guid="a3b723cc-40ca-4a5c-8660-e1dcb92dc5cb">
+      <Name>can_process.h</Name>
+      <Type>File</Type>
+      <RelativePath>src\CANBUS_process\can_process.h</RelativePath>
+      <TreeImageGuid>03cad1e8-2eb3-4cde-a8a3-982423631122</TreeImageGuid>
+      <ParentItem>178dcc2e-fa85-46c2-bb3b-4607aa72f79d</ParentItem>
     </Instance>
     <Instance Guid="fbfa3616-19f8-4260-8c32-78b42d14a467">
       <Name>general</Name>
@@ -674,59 +686,59 @@
       <BuildMode0>RABlAGYAYQB1AGwAdABCAHUAaQBsAGQA</BuildMode0>
       <BatchBuildFlag0>False</BatchBuildFlag0>
       <CurrentBuildMode>DefaultBuild</CurrentBuildMode>
-      <SourceItemGuid0>72c5b710-b9cb-47b6-843a-154925799010</SourceItemGuid0>
+      <SourceItemGuid0>9954c4f5-f6c5-4306-ad79-0746ec807a64</SourceItemGuid0>
       <SourceItemType0>CSource</SourceItemType0>
-      <SourceItemGuid1>9954c4f5-f6c5-4306-ad79-0746ec807a64</SourceItemGuid1>
+      <SourceItemGuid1>a253a154-ccb5-4480-9a7d-5f99ca34f3b9</SourceItemGuid1>
       <SourceItemType1>CSource</SourceItemType1>
-      <SourceItemGuid2>a253a154-ccb5-4480-9a7d-5f99ca34f3b9</SourceItemGuid2>
+      <SourceItemGuid2>a0a10981-fbd3-4383-9532-bd281430c522</SourceItemGuid2>
       <SourceItemType2>CSource</SourceItemType2>
-      <SourceItemGuid3>a0a10981-fbd3-4383-9532-bd281430c522</SourceItemGuid3>
+      <SourceItemGuid3>cad83852-a0a7-42e4-9167-d286c8b6debe</SourceItemGuid3>
       <SourceItemType3>CSource</SourceItemType3>
-      <SourceItemGuid4>cad83852-a0a7-42e4-9167-d286c8b6debe</SourceItemGuid4>
+      <SourceItemGuid4>1e389857-bd93-4831-8342-f9cae42fda78</SourceItemGuid4>
       <SourceItemType4>CSource</SourceItemType4>
-      <SourceItemGuid5>1e389857-bd93-4831-8342-f9cae42fda78</SourceItemGuid5>
+      <SourceItemGuid5>5992e39a-21fc-4c35-be9b-462239f28b48</SourceItemGuid5>
       <SourceItemType5>CSource</SourceItemType5>
-      <SourceItemGuid6>5992e39a-21fc-4c35-be9b-462239f28b48</SourceItemGuid6>
+      <SourceItemGuid6>4701e573-23d3-44a7-81a1-123170a280f5</SourceItemGuid6>
       <SourceItemType6>CSource</SourceItemType6>
-      <SourceItemGuid7>4701e573-23d3-44a7-81a1-123170a280f5</SourceItemGuid7>
+      <SourceItemGuid7>220315b5-d3ec-4347-9658-259882061086</SourceItemGuid7>
       <SourceItemType7>CSource</SourceItemType7>
-      <SourceItemGuid8>220315b5-d3ec-4347-9658-259882061086</SourceItemGuid8>
+      <SourceItemGuid8>8ea5175e-8cd7-4a04-8fb7-fd5fe1e8553b</SourceItemGuid8>
       <SourceItemType8>CSource</SourceItemType8>
-      <SourceItemGuid9>8ea5175e-8cd7-4a04-8fb7-fd5fe1e8553b</SourceItemGuid9>
+      <SourceItemGuid9>13c2c54e-fa03-4540-8b1c-fff692447b60</SourceItemGuid9>
       <SourceItemType9>CSource</SourceItemType9>
-      <SourceItemGuid10>13c2c54e-fa03-4540-8b1c-fff692447b60</SourceItemGuid10>
+      <SourceItemGuid10>a1eed792-398a-40b4-982f-57a8d3980ac4</SourceItemGuid10>
       <SourceItemType10>CSource</SourceItemType10>
-      <SourceItemGuid11>a1eed792-398a-40b4-982f-57a8d3980ac4</SourceItemGuid11>
+      <SourceItemGuid11>1baff18d-adc4-48ad-af5f-44a0b1abebc0</SourceItemGuid11>
       <SourceItemType11>CSource</SourceItemType11>
-      <SourceItemGuid12>1baff18d-adc4-48ad-af5f-44a0b1abebc0</SourceItemGuid12>
+      <SourceItemGuid12>49758bcd-5510-4ab2-80c5-1b7ab565e46c</SourceItemGuid12>
       <SourceItemType12>CSource</SourceItemType12>
-      <SourceItemGuid13>49758bcd-5510-4ab2-80c5-1b7ab565e46c</SourceItemGuid13>
+      <SourceItemGuid13>08cdc251-5da2-4b2d-ae68-d2079334f2f7</SourceItemGuid13>
       <SourceItemType13>CSource</SourceItemType13>
-      <SourceItemGuid14>08cdc251-5da2-4b2d-ae68-d2079334f2f7</SourceItemGuid14>
+      <SourceItemGuid14>320e3703-1d81-4297-ad16-c57a3542c1a3</SourceItemGuid14>
       <SourceItemType14>CSource</SourceItemType14>
-      <SourceItemGuid15>320e3703-1d81-4297-ad16-c57a3542c1a3</SourceItemGuid15>
+      <SourceItemGuid15>ef8a0c33-09ad-4ef2-8488-f319f818be8a</SourceItemGuid15>
       <SourceItemType15>CSource</SourceItemType15>
-      <SourceItemGuid16>ef8a0c33-09ad-4ef2-8488-f319f818be8a</SourceItemGuid16>
+      <SourceItemGuid16>e73679d4-f92e-444f-a187-703a108cb61f</SourceItemGuid16>
       <SourceItemType16>CSource</SourceItemType16>
-      <SourceItemGuid17>e73679d4-f92e-444f-a187-703a108cb61f</SourceItemGuid17>
+      <SourceItemGuid17>5b18660b-234f-4763-8ff8-ea6e3f96ce61</SourceItemGuid17>
       <SourceItemType17>CSource</SourceItemType17>
-      <SourceItemGuid18>5b18660b-234f-4763-8ff8-ea6e3f96ce61</SourceItemGuid18>
+      <SourceItemGuid18>cdf8f9cc-47c1-4bb3-83e5-9348b9293b3a</SourceItemGuid18>
       <SourceItemType18>CSource</SourceItemType18>
-      <SourceItemGuid19>cdf8f9cc-47c1-4bb3-83e5-9348b9293b3a</SourceItemGuid19>
+      <SourceItemGuid19>32b19eca-dda6-41ed-be5b-82ca612638f7</SourceItemGuid19>
       <SourceItemType19>CSource</SourceItemType19>
-      <SourceItemGuid20>32b19eca-dda6-41ed-be5b-82ca612638f7</SourceItemGuid20>
+      <SourceItemGuid20>63792476-4d14-47d2-9cb3-2c98efca01dd</SourceItemGuid20>
       <SourceItemType20>CSource</SourceItemType20>
-      <SourceItemGuid21>63792476-4d14-47d2-9cb3-2c98efca01dd</SourceItemGuid21>
+      <SourceItemGuid21>7c00e17e-a88d-4fdb-bfef-1c3a39787f21</SourceItemGuid21>
       <SourceItemType21>CSource</SourceItemType21>
-      <SourceItemGuid22>7c00e17e-a88d-4fdb-bfef-1c3a39787f21</SourceItemGuid22>
+      <SourceItemGuid22>9add57c2-35c4-4ab9-84d1-5aff15987fb5</SourceItemGuid22>
       <SourceItemType22>CSource</SourceItemType22>
-      <SourceItemGuid23>9add57c2-35c4-4ab9-84d1-5aff15987fb5</SourceItemGuid23>
+      <SourceItemGuid23>cbed999a-f8dd-446f-aa23-46bafb71c313</SourceItemGuid23>
       <SourceItemType23>CSource</SourceItemType23>
-      <SourceItemGuid24>cbed999a-f8dd-446f-aa23-46bafb71c313</SourceItemGuid24>
+      <SourceItemGuid24>63a45194-e6ec-4e3b-8fd6-67e7e9cbea81</SourceItemGuid24>
       <SourceItemType24>CSource</SourceItemType24>
-      <SourceItemGuid25>63a45194-e6ec-4e3b-8fd6-67e7e9cbea81</SourceItemGuid25>
+      <SourceItemGuid25>ad737fc7-946e-4970-ad07-15a3de95e8cc</SourceItemGuid25>
       <SourceItemType25>CSource</SourceItemType25>
-      <SourceItemGuid26>ad737fc7-946e-4970-ad07-15a3de95e8cc</SourceItemGuid26>
+      <SourceItemGuid26>28f5a7ae-06a5-416b-84c8-e7e60d0e2065</SourceItemGuid26>
       <SourceItemType26>CSource</SourceItemType26>
       <SourceItemCount>27</SourceItemCount>
       <LastDeviceChangedCounter>0</LastDeviceChangedCounter>
@@ -813,7 +825,7 @@
       <GeneralOptionPatch-DefaultValue>None</GeneralOptionPatch-DefaultValue>
       <GeneralOptionSaveAcc-DefaultValue>False</GeneralOptionSaveAcc-DefaultValue>
       <IsLockedByUser>False</IsLockedByUser>
-      <TimeTagModified--0>-8586030136280916418</TimeTagModified--0>
+      <TimeTagModified--0>-8585789070000426206</TimeTagModified--0>
       <BuildMode-0>DefaultBuild</BuildMode-0>
       <Memo-0 />
       <OutputMessageFormat-0>%TargetFiles%</OutputMessageFormat-0>
@@ -872,7 +884,7 @@
       <GeneralOptionBaseAddressRegister-0>None</GeneralOptionBaseAddressRegister-0>
       <GeneralOptionPatch-0>None</GeneralOptionPatch-0>
       <GeneralOptionSaveAcc-0>False</GeneralOptionSaveAcc-0>
-      <LastCompilerVersion-0>V3.02.00</LastCompilerVersion-0>
+      <LastCompilerVersion-0>V3.03.00</LastCompilerVersion-0>
     </Instance>
     <Instance Guid="95a63257-4aa7-40c0-a74a-7991543b099b">
       <COptionLangC-DefaultValue>C</COptionLangC-DefaultValue>
@@ -985,8 +997,9 @@
       <COptionCheck-DefaultValue>No</COptionCheck-DefaultValue>
       <COptionFloatOrder-DefaultValue>False</COptionFloatOrder-DefaultValue>
       <COptionIncode-DefaultValue>Sjis</COptionIncode-DefaultValue>
+      <COptionBranchChaining-DefaultValue>None</COptionBranchChaining-DefaultValue>
       <IsLockedByUser>False</IsLockedByUser>
-      <TimeTagModified--0>-8586026708908015643</TimeTagModified--0>
+      <TimeTagModified--0>-8585789054715969148</TimeTagModified--0>
       <COptionLangC-0>C99</COptionLangC-0>
       <COptionListfile-0>False</COptionListfile-0>
       <COptionLogo-0>False</COptionLogo-0>
@@ -1005,7 +1018,8 @@
       <COptionXcref-0>False</COptionXcref-0>
       <COptionControlFlowIntegrity-0>None</COptionControlFlowIntegrity-0>
       <COptionDebug-0>True</COptionDebug-0>
-      <COptionInclude-0>.
+      <COptionInclude-0>src\CANBUS_process
+.
 src\r_can_rx\ref
 src\r_can_rx
 src\r_pincfg
@@ -1104,6 +1118,7 @@ src\general
       <COptionCheck-0>No</COptionCheck-0>
       <COptionFloatOrder-0>False</COptionFloatOrder-0>
       <COptionIncode-0>Sjis</COptionIncode-0>
+      <COptionBranchChaining-0>None</COptionBranchChaining-0>
     </Instance>
     <Instance Guid="5ad1746c-d03e-4610-a91f-aaa4fb37bc10">
       <AsmOptionChkpm-DefaultValue>False</AsmOptionChkpm-DefaultValue>
@@ -1241,7 +1256,7 @@ D_2=R_2
       <LinkOptionCommandLine-DefaultValue />
       <LinkOptionSplitVect-DefaultValue>False</LinkOptionSplitVect-DefaultValue>
       <IsLockedByUser>False</IsLockedByUser>
-      <TimeTagModified--0>-8586026708875069439</TimeTagModified--0>
+      <TimeTagModified--0>-8585789026527831417</TimeTagModified--0>
       <LinkOptionCpu-0>False</LinkOptionCpu-0>
       <LinkOptionForm-0>Absolute</LinkOptionForm-0>
       <LinkOptionFormConvert-0>Stype</LinkOptionFormConvert-0>
@@ -1355,18 +1370,24 @@ D_2=R_2
       <LinkOptionByteCountValue-DefaultValue>FF</LinkOptionByteCountValue-DefaultValue>
       <LinkOptionCrc-DefaultValue>None</LinkOptionCrc-DefaultValue>
       <LinkOptionOtherAdditionalOptionsForConvertFile-DefaultValue />
-      <HexOptionCommandLine-DefaultValue />
+      <HexOptionCommandLine-DefaultValue>-end
+-input=%BuildModeName%\%ProjectName%.abs
+-form=stype
+-output=%BuildModeName%\%ProjectName%.mot
+-exit
+</HexOptionCommandLine-DefaultValue>
       <LinkOptionCrc2-DefaultValue>False</LinkOptionCrc2-DefaultValue>
       <LinkOptionCrcOutputAddress-DefaultValue>0</LinkOptionCrcOutputAddress-DefaultValue>
       <LinkOptionCrcCalculationRange-DefaultValue />
       <HexOptionCrcType-DefaultValue>Ccitt</HexOptionCrcType-DefaultValue>
       <HexOptionCrcInitialValue-DefaultValue />
       <HexOptionCrcEndian-DefaultValue>None</HexOptionCrcEndian-DefaultValue>
+      <HexOptionVerboseCrc-DefaultValue>False</HexOptionVerboseCrc-DefaultValue>
       <HexOptionEndRecord-DefaultValue>None</HexOptionEndRecord-DefaultValue>
       <LinkOptionS9-DefaultValue>False</LinkOptionS9-DefaultValue>
       <HexOptionCreateUnfilledArea-DefaultValue>False</HexOptionCreateUnfilledArea-DefaultValue>
       <IsLockedByUser>False</IsLockedByUser>
-      <TimeTagModified--0>-8586030136280746871</TimeTagModified--0>
+      <TimeTagModified--0>-8586008638982789713</TimeTagModified--0>
       <HexOptionForm-0>Stype</HexOptionForm-0>
       <HexOptionOutput-0>True</HexOptionOutput-0>
       <HexOptionSameLinkMessage-0>True</HexOptionSameLinkMessage-0>
@@ -1392,13 +1413,19 @@ D_2=R_2
       <LinkOptionByteCountValue-0>FF</LinkOptionByteCountValue-0>
       <LinkOptionCrc-0>None</LinkOptionCrc-0>
       <LinkOptionOtherAdditionalOptionsForConvertFile-0 />
-      <HexOptionCommandLine-0 />
+      <HexOptionCommandLine-0>-end
+-input=%BuildModeName%\%ProjectName%.abs
+-form=stype
+-output=%BuildModeName%\%ProjectName%.mot
+-exit
+</HexOptionCommandLine-0>
       <LinkOptionCrc2-0>False</LinkOptionCrc2-0>
       <LinkOptionCrcOutputAddress-0>0</LinkOptionCrcOutputAddress-0>
       <LinkOptionCrcCalculationRange-0 />
       <HexOptionCrcType-0>Ccitt</HexOptionCrcType-0>
       <HexOptionCrcInitialValue-0 />
       <HexOptionCrcEndian-0>None</HexOptionCrcEndian-0>
+      <HexOptionVerboseCrc-0>False</HexOptionVerboseCrc-0>
       <HexOptionEndRecord-0>None</HexOptionEndRecord-0>
       <LinkOptionS9-0>False</LinkOptionS9-0>
       <HexOptionCreateUnfilledArea-0>False</HexOptionCreateUnfilledArea-0>
@@ -1543,8 +1570,9 @@ D_2=R_2
       <LbgOptionSimpleFloatConv-DefaultValue>False</LbgOptionSimpleFloatConv-DefaultValue>
       <LbgOptionFpu-DefaultValue>Fpu</LbgOptionFpu-DefaultValue>
       <LbgOptionFloatOrder-DefaultValue>False</LbgOptionFloatOrder-DefaultValue>
+      <LbgOptionBranchChaining-DefaultValue>None</LbgOptionBranchChaining-DefaultValue>
       <IsLockedByUser>False</IsLockedByUser>
-      <TimeTagModified--0>-8586030136073129642</TimeTagModified--0>
+      <TimeTagModified--0>-8585789070000396289</TimeTagModified--0>
       <LbgOptionLanguage-0>C99</LbgOptionLanguage-0>
       <LbgOptionLibraryMode-0>MakeOptionChanged</LbgOptionLibraryMode-0>
       <LbgOptionLogo-0>False</LbgOptionLogo-0>
@@ -1615,6 +1643,7 @@ D_2=R_2
       <LbgOptionSimpleFloatConv-0>False</LbgOptionSimpleFloatConv-0>
       <LbgOptionFpu-0>Fpu</LbgOptionFpu-0>
       <LbgOptionFloatOrder-0>False</LbgOptionFloatOrder-0>
+      <LbgOptionBranchChaining-0>None</LbgOptionBranchChaining-0>
     </Instance>
     <Instance Guid="3d00de8d-ddff-46e5-b03f-57a886c48677">
       <LinkOrder-0>0</LinkOrder-0>
@@ -1906,17 +1935,13 @@ D_2=R_2
       <ItemAddTime>637345615767735854</ItemAddTime>
       <ItemAddTimeCount>0</ItemAddTimeCount>
     </Instance>
-    <Instance Guid="861b8dd3-5d23-4d27-b5e5-f0b2d34602bd">
-      <ItemAddTime>637345615946780046</ItemAddTime>
+    <Instance Guid="480211a4-a2c4-4c47-9fd6-7aed24eb8b12">
+      <ItemAddTime>637583280902567437</ItemAddTime>
       <ItemAddTimeCount>0</ItemAddTimeCount>
     </Instance>
-    <Instance Guid="f5877da0-53cc-4d47-a21a-580605d4a687">
-      <ItemAddTime>637345615946780046</ItemAddTime>
-      <ItemAddTimeCount>1</ItemAddTimeCount>
-    </Instance>
-    <Instance Guid="72c5b710-b9cb-47b6-843a-154925799010">
-      <ItemAddTime>637345615946780046</ItemAddTime>
-      <ItemAddTimeCount>2</ItemAddTimeCount>
+    <Instance Guid="a4253b20-1be6-434a-8761-fc0c62635c31">
+      <ItemAddTime>637583377025427710</ItemAddTime>
+      <ItemAddTimeCount>0</ItemAddTimeCount>
     </Instance>
     <Instance Guid="9954c4f5-f6c5-4306-ad79-0746ec807a64">
       <ItemAddTime>637345615946780046</ItemAddTime>
@@ -1926,12 +1951,20 @@ D_2=R_2
       <ItemAddTime>637346446727735626</ItemAddTime>
       <ItemAddTimeCount>0</ItemAddTimeCount>
     </Instance>
+    <Instance Guid="28f5a7ae-06a5-416b-84c8-e7e60d0e2065">
+      <ItemAddTime>637583269963333293</ItemAddTime>
+      <ItemAddTimeCount>0</ItemAddTimeCount>
+    </Instance>
+    <Instance Guid="a3b723cc-40ca-4a5c-8660-e1dcb92dc5cb">
+      <ItemAddTime>637583270139386382</ItemAddTime>
+      <ItemAddTimeCount>0</ItemAddTimeCount>
+    </Instance>
     <Instance Guid="a7be515f-f007-45ed-9059-4e1500c0f74d">
-      <TimeTagModified-SourceItem0--0>-8586026708907995762</TimeTagModified-SourceItem0--0>
+      <TimeTagModified-SourceItem0--0>-8585789045647358415</TimeTagModified-SourceItem0--0>
       <SourceItem0-IsLockedByUser>False</SourceItem0-IsLockedByUser>
       <SourceItem0-BuildingTarget-0>True</SourceItem0-BuildingTarget-0>
       <SourceItem0-IndividualCompileOption-0>False</SourceItem0-IndividualCompileOption-0>
-      <TimeTagModified-SourceItem1--0>-8586026708907995762</TimeTagModified-SourceItem1--0>
+      <TimeTagModified-SourceItem1--0>-8586030135318888262</TimeTagModified-SourceItem1--0>
       <SourceItem1-IsLockedByUser>False</SourceItem1-IsLockedByUser>
       <SourceItem1-BuildingTarget-0>True</SourceItem1-BuildingTarget-0>
       <SourceItem1-IndividualCompileOption-0>False</SourceItem1-IndividualCompileOption-0>
@@ -1947,11 +1980,11 @@ D_2=R_2
       <SourceItem4-IsLockedByUser>False</SourceItem4-IsLockedByUser>
       <SourceItem4-BuildingTarget-0>True</SourceItem4-BuildingTarget-0>
       <SourceItem4-IndividualCompileOption-0>False</SourceItem4-IndividualCompileOption-0>
-      <TimeTagModified-SourceItem5--0>-8586030135318888262</TimeTagModified-SourceItem5--0>
+      <TimeTagModified-SourceItem5--0>-8586030135318319783</TimeTagModified-SourceItem5--0>
       <SourceItem5-IsLockedByUser>False</SourceItem5-IsLockedByUser>
       <SourceItem5-BuildingTarget-0>True</SourceItem5-BuildingTarget-0>
       <SourceItem5-IndividualCompileOption-0>False</SourceItem5-IndividualCompileOption-0>
-      <TimeTagModified-SourceItem6--0>-8586030135318319783</TimeTagModified-SourceItem6--0>
+      <TimeTagModified-SourceItem6--0>-8586030135317152897</TimeTagModified-SourceItem6--0>
       <SourceItem6-IsLockedByUser>False</SourceItem6-IsLockedByUser>
       <SourceItem6-BuildingTarget-0>True</SourceItem6-BuildingTarget-0>
       <SourceItem6-IndividualCompileOption-0>False</SourceItem6-IndividualCompileOption-0>
@@ -1975,7 +2008,7 @@ D_2=R_2
       <SourceItem11-IsLockedByUser>False</SourceItem11-IsLockedByUser>
       <SourceItem11-BuildingTarget-0>True</SourceItem11-BuildingTarget-0>
       <SourceItem11-IndividualCompileOption-0>False</SourceItem11-IndividualCompileOption-0>
-      <TimeTagModified-SourceItem12--0>-8586030135317152897</TimeTagModified-SourceItem12--0>
+      <TimeTagModified-SourceItem12--0>-8586030135317142926</TimeTagModified-SourceItem12--0>
       <SourceItem12-IsLockedByUser>False</SourceItem12-IsLockedByUser>
       <SourceItem12-BuildingTarget-0>True</SourceItem12-BuildingTarget-0>
       <SourceItem12-IndividualCompileOption-0>False</SourceItem12-IndividualCompileOption-0>
@@ -2003,7 +2036,7 @@ D_2=R_2
       <SourceItem18-IsLockedByUser>False</SourceItem18-IsLockedByUser>
       <SourceItem18-BuildingTarget-0>True</SourceItem18-BuildingTarget-0>
       <SourceItem18-IndividualCompileOption-0>False</SourceItem18-IndividualCompileOption-0>
-      <TimeTagModified-SourceItem19--0>-8586030135317142926</TimeTagModified-SourceItem19--0>
+      <TimeTagModified-SourceItem19--0>-8586030135316803832</TimeTagModified-SourceItem19--0>
       <SourceItem19-IsLockedByUser>False</SourceItem19-IsLockedByUser>
       <SourceItem19-BuildingTarget-0>True</SourceItem19-BuildingTarget-0>
       <SourceItem19-IndividualCompileOption-0>False</SourceItem19-IndividualCompileOption-0>
@@ -2019,19 +2052,19 @@ D_2=R_2
       <SourceItem22-IsLockedByUser>False</SourceItem22-IsLockedByUser>
       <SourceItem22-BuildingTarget-0>True</SourceItem22-BuildingTarget-0>
       <SourceItem22-IndividualCompileOption-0>False</SourceItem22-IndividualCompileOption-0>
-      <TimeTagModified-SourceItem23--0>-8586030135316803832</TimeTagModified-SourceItem23--0>
+      <TimeTagModified-SourceItem23--0>-8586030135316793862</TimeTagModified-SourceItem23--0>
       <SourceItem23-IsLockedByUser>False</SourceItem23-IsLockedByUser>
       <SourceItem23-BuildingTarget-0>True</SourceItem23-BuildingTarget-0>
       <SourceItem23-IndividualCompileOption-0>False</SourceItem23-IndividualCompileOption-0>
-      <TimeTagModified-SourceItem24--0>-8586030135316793862</TimeTagModified-SourceItem24--0>
+      <TimeTagModified-SourceItem24--0>-8586030135315986022</TimeTagModified-SourceItem24--0>
       <SourceItem24-IsLockedByUser>False</SourceItem24-IsLockedByUser>
       <SourceItem24-BuildingTarget-0>True</SourceItem24-BuildingTarget-0>
       <SourceItem24-IndividualCompileOption-0>False</SourceItem24-IndividualCompileOption-0>
-      <TimeTagModified-SourceItem25--0>-8586030135315986022</TimeTagModified-SourceItem25--0>
+      <TimeTagModified-SourceItem25--0>-8586026709087039954</TimeTagModified-SourceItem25--0>
       <SourceItem25-IsLockedByUser>False</SourceItem25-IsLockedByUser>
       <SourceItem25-BuildingTarget-0>True</SourceItem25-BuildingTarget-0>
       <SourceItem25-IndividualCompileOption-0>False</SourceItem25-IndividualCompileOption-0>
-      <TimeTagModified-SourceItem26--0>-8586026709087039954</TimeTagModified-SourceItem26--0>
+      <TimeTagModified-SourceItem26--0>-8585789054891442515</TimeTagModified-SourceItem26--0>
       <SourceItem26-IsLockedByUser>False</SourceItem26-IsLockedByUser>
       <SourceItem26-BuildingTarget-0>True</SourceItem26-BuildingTarget-0>
       <SourceItem26-IndividualCompileOption-0>False</SourceItem26-IndividualCompileOption-0>
@@ -2058,7 +2091,7 @@ D_2=R_2
       <ProjectGeneratr-GeneratedFile10>lowsrc.h</ProjectGeneratr-GeneratedFile10>
       <ProjectGeneratr-GeneratedFile11>sbrk.h</ProjectGeneratr-GeneratedFile11>
       <ProjectGeneratr-GeneratedFile12>stacksct.h</ProjectGeneratr-GeneratedFile12>
-      <ProjectGeneratr-GeneratedFile13>172CAN_2.c</ProjectGeneratr-GeneratedFile13>
+      <ProjectGeneratr-GeneratedFile13>CAN_REC.c</ProjectGeneratr-GeneratedFile13>
       <ProjectGeneratr-GeneratedFile14>typedefine.h</ProjectGeneratr-GeneratedFile14>
     </Instance>
   </Class>
@@ -2102,7 +2135,7 @@ D_2=R_2
       <DebuggerProperty-DownloadProperty-DebugInformation-DownloadFiles-DownloadItem0-DebuggerGuid />
       <DebuggerProperty-DownloadProperty-DebugInformation-DownloadFiles-DownloadItem0-IsDefaultItem>True</DebuggerProperty-DownloadProperty-DebugInformation-DownloadFiles-DownloadItem0-IsDefaultItem>
       <DebuggerProperty-DownloadProperty-DebugInformation-DownloadFiles-DownloadItem0-DefaultItemProjectGuid>38395ad9-6907-4d96-a6e2-f63e57b883aa</DebuggerProperty-DownloadProperty-DebugInformation-DownloadFiles-DownloadItem0-DefaultItemProjectGuid>
-      <DebuggerProperty-DownloadProperty-DebugInformation-DownloadFiles-DownloadItem0-FileName>DefaultBuild\172CAN_2.abs</DebuggerProperty-DownloadProperty-DebugInformation-DownloadFiles-DownloadItem0-FileName>
+      <DebuggerProperty-DownloadProperty-DebugInformation-DownloadFiles-DownloadItem0-FileName>DefaultBuild\CAN_REC.abs</DebuggerProperty-DownloadProperty-DebugInformation-DownloadFiles-DownloadItem0-FileName>
       <DebuggerProperty-DownloadProperty-DebugInformation-DownloadFiles-DownloadItem0-FileType>LoadModuleFile</DebuggerProperty-DownloadProperty-DebugInformation-DownloadFiles-DownloadItem0-FileType>
       <DebuggerProperty-DownloadProperty-DebugInformation-DownloadFiles-DownloadItem0-CompilerType>Auto</DebuggerProperty-DownloadProperty-DebugInformation-DownloadFiles-DownloadItem0-CompilerType>
       <DebuggerProperty-DownloadProperty-DebugInformation-DownloadFiles-DownloadItem0-Offset>0</DebuggerProperty-DownloadProperty-DebugInformation-DownloadFiles-DownloadItem0-Offset>
@@ -2342,7 +2375,7 @@ D_2=R_2
       <DebuggerProperty-DownloadProperty-DebugInformation-DownloadFiles-DownloadItem0-DebuggerGuid />
       <DebuggerProperty-DownloadProperty-DebugInformation-DownloadFiles-DownloadItem0-IsDefaultItem>True</DebuggerProperty-DownloadProperty-DebugInformation-DownloadFiles-DownloadItem0-IsDefaultItem>
       <DebuggerProperty-DownloadProperty-DebugInformation-DownloadFiles-DownloadItem0-DefaultItemProjectGuid>38395ad9-6907-4d96-a6e2-f63e57b883aa</DebuggerProperty-DownloadProperty-DebugInformation-DownloadFiles-DownloadItem0-DefaultItemProjectGuid>
-      <DebuggerProperty-DownloadProperty-DebugInformation-DownloadFiles-DownloadItem0-FileName>DefaultBuild\172CAN_2.abs</DebuggerProperty-DownloadProperty-DebugInformation-DownloadFiles-DownloadItem0-FileName>
+      <DebuggerProperty-DownloadProperty-DebugInformation-DownloadFiles-DownloadItem0-FileName>DefaultBuild\CAN_REC.abs</DebuggerProperty-DownloadProperty-DebugInformation-DownloadFiles-DownloadItem0-FileName>
       <DebuggerProperty-DownloadProperty-DebugInformation-DownloadFiles-DownloadItem0-FileType>LoadModuleFile</DebuggerProperty-DownloadProperty-DebugInformation-DownloadFiles-DownloadItem0-FileType>
       <DebuggerProperty-DownloadProperty-DebugInformation-DownloadFiles-DownloadItem0-CompilerType>Auto</DebuggerProperty-DownloadProperty-DebugInformation-DownloadFiles-DownloadItem0-CompilerType>
       <DebuggerProperty-DownloadProperty-DebugInformation-DownloadFiles-DownloadItem0-Offset>0</DebuggerProperty-DownloadProperty-DebugInformation-DownloadFiles-DownloadItem0-Offset>
@@ -2698,7 +2731,7 @@ D_2=R_2
       <DebuggerProperty-DownloadProperty-DebugInformation-DownloadFiles-DownloadItem0-DebuggerGuid />
       <DebuggerProperty-DownloadProperty-DebugInformation-DownloadFiles-DownloadItem0-IsDefaultItem>True</DebuggerProperty-DownloadProperty-DebugInformation-DownloadFiles-DownloadItem0-IsDefaultItem>
       <DebuggerProperty-DownloadProperty-DebugInformation-DownloadFiles-DownloadItem0-DefaultItemProjectGuid>38395ad9-6907-4d96-a6e2-f63e57b883aa</DebuggerProperty-DownloadProperty-DebugInformation-DownloadFiles-DownloadItem0-DefaultItemProjectGuid>
-      <DebuggerProperty-DownloadProperty-DebugInformation-DownloadFiles-DownloadItem0-FileName>DefaultBuild\172CAN_2.abs</DebuggerProperty-DownloadProperty-DebugInformation-DownloadFiles-DownloadItem0-FileName>
+      <DebuggerProperty-DownloadProperty-DebugInformation-DownloadFiles-DownloadItem0-FileName>DefaultBuild\CAN_REC.abs</DebuggerProperty-DownloadProperty-DebugInformation-DownloadFiles-DownloadItem0-FileName>
       <DebuggerProperty-DownloadProperty-DebugInformation-DownloadFiles-DownloadItem0-FileType>LoadModuleFile</DebuggerProperty-DownloadProperty-DebugInformation-DownloadFiles-DownloadItem0-FileType>
       <DebuggerProperty-DownloadProperty-DebugInformation-DownloadFiles-DownloadItem0-CompilerType>Auto</DebuggerProperty-DownloadProperty-DebugInformation-DownloadFiles-DownloadItem0-CompilerType>
       <DebuggerProperty-DownloadProperty-DebugInformation-DownloadFiles-DownloadItem0-Offset>0</DebuggerProperty-DownloadProperty-DebugInformation-DownloadFiles-DownloadItem0-Offset>
@@ -2938,7 +2971,7 @@ D_2=R_2
       <DebuggerProperty-DownloadProperty-DebugInformation-DownloadFiles-DownloadItem0-DebuggerGuid />
       <DebuggerProperty-DownloadProperty-DebugInformation-DownloadFiles-DownloadItem0-IsDefaultItem>True</DebuggerProperty-DownloadProperty-DebugInformation-DownloadFiles-DownloadItem0-IsDefaultItem>
       <DebuggerProperty-DownloadProperty-DebugInformation-DownloadFiles-DownloadItem0-DefaultItemProjectGuid>38395ad9-6907-4d96-a6e2-f63e57b883aa</DebuggerProperty-DownloadProperty-DebugInformation-DownloadFiles-DownloadItem0-DefaultItemProjectGuid>
-      <DebuggerProperty-DownloadProperty-DebugInformation-DownloadFiles-DownloadItem0-FileName>DefaultBuild\172CAN_2.abs</DebuggerProperty-DownloadProperty-DebugInformation-DownloadFiles-DownloadItem0-FileName>
+      <DebuggerProperty-DownloadProperty-DebugInformation-DownloadFiles-DownloadItem0-FileName>DefaultBuild\CAN_REC.abs</DebuggerProperty-DownloadProperty-DebugInformation-DownloadFiles-DownloadItem0-FileName>
       <DebuggerProperty-DownloadProperty-DebugInformation-DownloadFiles-DownloadItem0-FileType>LoadModuleFile</DebuggerProperty-DownloadProperty-DebugInformation-DownloadFiles-DownloadItem0-FileType>
       <DebuggerProperty-DownloadProperty-DebugInformation-DownloadFiles-DownloadItem0-CompilerType>Auto</DebuggerProperty-DownloadProperty-DebugInformation-DownloadFiles-DownloadItem0-CompilerType>
       <DebuggerProperty-DownloadProperty-DebugInformation-DownloadFiles-DownloadItem0-Offset>0</DebuggerProperty-DownloadProperty-DebugInformation-DownloadFiles-DownloadItem0-Offset>
@@ -3410,10 +3443,10 @@ D_2=R_2
   </Class>
   <Class Guid="90536345-15c8-40cb-957c-e59974e4bf78">
     <Instance Guid="90536345-15c8-40cb-957c-e59974e4bf78">
-      <GenerateFileFolder>D:\RX64M\LAB\CAN_bus\172CAN_2</GenerateFileFolder>
+      <GenerateFileFolder>D:\RX64M\LAB\CAN_bus\CAN_REC</GenerateFileFolder>
       <SmcExePath>C:\Program Files (x86)\Renesas Electronics\SmartConfigurator\RX\eclipse\SmartConfigurator.exe</SmcExePath>
       <CodeGeneratorFilesGuid>11e9d8e4-9e24-454e-a855-a859251f211f</CodeGeneratorFilesGuid>
-      <SCFGFile>172CAN_2.scfg</SCFGFile>
+      <SCFGFile>CAN_REC.scfg</SCFGFile>
     </Instance>
   </Class>
   <Class Guid="2a2c2a43-ecdb-4e88-80bd-e75f3e33db90">

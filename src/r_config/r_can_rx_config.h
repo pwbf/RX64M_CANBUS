@@ -64,7 +64,8 @@ mailboxes for messages sent and received. */
  * #define FRAME_ID_MODE   EXT_ID_MODE         29-bit CAN ID. 
  * #define FRAME_ID_MODE   MIXED_ID_MODE
  ***********************************************************************************************************************/
-#define FRAME_ID_MODE   (STD_ID_MODE)
+//#define FRAME_ID_MODE   (STD_ID_MODE)
+#define FRAME_ID_MODE   (EXT_ID_MODE)
 
 /**********************************************************************************************************************
  * PORT SETUP *
@@ -166,7 +167,7 @@ mailboxes for messages sent and received. */
      *      ============
      *      SUM = 24
      */
-#define BITRATE    (500000)
+#define BITRATE    (250000)
 #define CAN_BRP     (5)
 #define CAN_TSEG1   (15)
 #define CAN_TSEG2   (8)
