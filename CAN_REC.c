@@ -26,11 +26,9 @@ void main(void)
 	//如果CANBUS return = R_CAN_OK, 將數值讀回
 	if(STATUS_WHEEL_SPEED_INFO == R_CAN_OK){
 		R_CAN_RxRead(CAN_CHANNEL_SET, MAILBOX_ID_SPEED_INFO ,&SPEED_DATA);
-		SHOW_DATA();
 	}
 	if(STATUS_TRANSMISSION_INFO == R_CAN_OK){
 		R_CAN_RxRead(CAN_CHANNEL_SET, MAILBOX_ID_TRANS_CTRL ,&TRANS_DATA);
-		SHOW_DATA();
 	}
 	SHOW_DATA();
 	R_BSP_SoftwareDelay(5, BSP_DELAY_MILLISECS);
@@ -52,7 +50,7 @@ void CHK_ALL_MB(void){
 }
 
 void SHOW_DATA(void){
-	uint32_t rpmNow = SPEED_DATA.data[1]*256 | SPEED_DATA.data[0];	//誰是high誰是low待確認
+	uint32_t rpmNow = SPEED_DATA.data[0]*256 | SPEED_DATA.data[1];	//0 High, 1 Low
 	vehicleSpeed = WHEEL_DIA * rpmNow * 0.1885;				//v = Dia * RPM * 0.1885
 	uint8_t speedDigit[3] = {0,0,0};
 	vehicleGear = TRANS_DATA.data[2];
@@ -111,80 +109,11 @@ void SHOW_DATA(void){
 }
 
 void DisplayControl(uint8_t digit3, uint8_t digit2, uint8_t digit1, uint8_t digit0){
-	//Display Digit 0
-	DIGIT_CTRL_0 = GPIO_LOW;
-	DIGIT_CTRL_1 = GPIO_HIGH;
-	DIGIT_CTRL_2 = GPIO_HIGH;
-	DIGIT_CTRL_3 = GPIO_HIGH;
-	SEG_LED_A = chBin[digit0][0];
-	SEG_LED_B = chBin[digit0][1];
-	SEG_LED_C = chBin[digit0][2];
-	SEG_LED_D = chBin[digit0][3];
-	SEG_LED_E = chBin[digit0][4];
-	SEG_LED_F = chBin[digit0][5];
-	SEG_LED_G = chBin[digit0][6];
-	SEG_LED_DP = chBin[digit0][7];
-	R_BSP_SoftwareDelay(5, BSP_DELAY_MILLISECS);
-	
-	//Display Digit 1
-	DIGIT_CTRL_0 = GPIO_HIGH;
-	DIGIT_CTRL_1 = GPIO_LOW;
-	DIGIT_CTRL_2 = GPIO_HIGH;
-	DIGIT_CTRL_3 = GPIO_HIGH;
-	SEG_LED_A = chBin[digit1][0];
-	SEG_LED_B = chBin[digit1][1];
-	SEG_LED_C = chBin[digit1][2];
-	SEG_LED_D = chBin[digit1][3];
-	SEG_LED_E = chBin[digit1][4];
-	SEG_LED_F = chBin[digit1][5];
-	SEG_LED_G = chBin[digit1][6];
-	SEG_LED_DP = chBin[digit1][7];
-	R_BSP_SoftwareDelay(5, BSP_DELAY_MILLISECS);
-	
-	//Display Digit 2
-	DIGIT_CTRL_0 = GPIO_HIGH;
-	DIGIT_CTRL_1 = GPIO_HIGH;
-	DIGIT_CTRL_2 = GPIO_LOW;
-	DIGIT_CTRL_3 = GPIO_HIGH;
-	SEG_LED_A = chBin[digit2][0];
-	SEG_LED_B = chBin[digit2][1];
-	SEG_LED_C = chBin[digit2][2];
-	SEG_LED_D = chBin[digit2][3];
-	SEG_LED_E = chBin[digit2][4];
-	SEG_LED_F = chBin[digit2][5];
-	SEG_LED_G = chBin[digit2][6];
-	SEG_LED_DP = chBin[digit2][7];
-	R_BSP_SoftwareDelay(5, BSP_DELAY_MILLISECS);
-	
-	//Display Digit 3
-	DIGIT_CTRL_0 = GPIO_HIGH;
-	DIGIT_CTRL_1 = GPIO_HIGH;
-	DIGIT_CTRL_2 = GPIO_HIGH;
-	DIGIT_CTRL_3 = GPIO_LOW;
-	SEG_LED_A = chBin[digit3][0];
-	SEG_LED_B = chBin[digit3][1];
-	SEG_LED_C = chBin[digit3][2];
-	SEG_LED_D = chBin[digit3][3];
-	SEG_LED_E = chBin[digit3][4];
-	SEG_LED_F = chBin[digit3][5];
-	SEG_LED_G = chBin[digit3][6];
-	SEG_LED_DP = chBin[digit3][7];
-	R_BSP_SoftwareDelay(5, BSP_DELAY_MILLISECS);
+
 }
 
 void GPIO_init(void){
-	PDR_DIGIT_CTRL_0 = GPIO_OUTPUT;
-	PDR_DIGIT_CTRL_1 = GPIO_OUTPUT;
-	PDR_DIGIT_CTRL_2 = GPIO_OUTPUT;
-	PDR_DIGIT_CTRL_3 = GPIO_OUTPUT;
-	PDR_SEG_LED_A = GPIO_OUTPUT;
-	PDR_SEG_LED_B = GPIO_OUTPUT;
-	PDR_SEG_LED_C = GPIO_OUTPUT;
-	PDR_SEG_LED_D = GPIO_OUTPUT;
-	PDR_SEG_LED_E = GPIO_OUTPUT;
-	PDR_SEG_LED_F = GPIO_OUTPUT;
-	PDR_SEG_LED_G = GPIO_OUTPUT;
-	PDR_SEG_LED_DP = GPIO_OUTPUT;
+
 }
 
 

@@ -47,7 +47,7 @@ format: [A,B,C,D,E,F,G,dp]
 #define SEG_LED_DP		PORTD.PODR.BIT.B7
 
 uint8_t chBin[16][8] = {
-      /*{A,B,C,D,E,F,G,d}*/
+    /*{A,B,C,D,E,F,G,d}*/
 	{0,0,0,0,0,0,1,1}, //0
 	{1,0,0,1,1,1,1,1}, //1
 	{0,0,1,0,0,1,0,1}, //2
